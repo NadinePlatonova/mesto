@@ -1,4 +1,5 @@
 .header {
-  width: calc(100% - 200px*2);
+  width: 100%;
+  max-width: calc(100% - 200px*2);
   padding: 0;
 }

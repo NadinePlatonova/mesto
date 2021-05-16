@@ -1,6 +1,8 @@
 .profile {
- padding: 0;
- display: flex;
- justify-content: space-between;
- align-items: center;
+  width: 100%;
+  max-width: (100% - 200px*2);
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
