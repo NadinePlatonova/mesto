@@ -18,7 +18,7 @@
                 <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Аватар профиля Жак-Ив Кусто">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__role">Исследователь океана</p>
-                <button type="button" class="profile__edit-button"></button>
+                <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
             </div>
             <button type="button" class="profile__add-button"></button>
         </section>
@@ -29,42 +29,42 @@
                     <img class="element__image" src="images/karachaevsk.jpg" alt="Фотография Карачаевска">
                     <div class="element__info">
                         <h2 class="element__title">Карачаевск</h2>
-                        <button type="button" class="element__like-button"></button>
+                        <button type="button" class="element__like-button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img class="element__image" src="images/elbrus.jpg" alt="Фотография Эльбруса">
                     <div class="element__info">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button type="button" class="element__like-button"></button>
+                        <button type="button" class="element__like-button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img class="element__image" src="images/dombai.jpg" alt="Фотография Домбая">
                     <div class="element__info">
                         <h2 class="element__title">Домбай</h2>
-                        <button type="button" class="element__like-button"></button>
+                        <button type="button" class="element__like-button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img class="element__image" src="images/elbrus.jpg" alt="Фотография Эльбруса">
                     <div class="element__info">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button type="button" class="element__like-button"></button>
+                        <button type="button" class="element__like-button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img class="element__image" src="images/dombai.jpg" alt="Фотография Домбая">
                     <div class="element__info">
                         <h2 class="element__title">Домбай</h2>
-                        <button type="button" class="element__like-button"></button>
+                        <button type="button" class="element__like-button" aria-label="Лайк"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img class="element__image" src="images/karachaevsk.jpg" alt="Фотография Карачаево-Черкесии">
                     <div class="element__info">
                         <h2 class="element__title">Карачаево-Черкесия</h2>
-                        <button type="button" class="element__like-button"></button>
+                        <button type="button" class="element__like-button" aria-label="Лайк"></button>
                     </div>
                 </li>
             </ul>
@@ -75,5 +75,14 @@
     <footer class="footer footer__container">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+
+    <section class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" placeholder="Жак-Ив Кусто"></input>
+
+        </div>
+    </section>
 </body>
 </html>
