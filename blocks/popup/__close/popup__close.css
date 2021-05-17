@@ -1,0 +1,9 @@
+.popup__close {
+  background-image: url(../../../images/close-icon.svg);
+  width: 40px;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  color: #fff;
+}
