@@ -8,3 +8,13 @@
   padding: 22px 0 16px;
   margin: 0;
 }
+
+@media screen and (min-width: 320px) and (max-width: 1139px) {
+  .profile__name {
+    max-width: 189px;
+    font-size: 27px;
+    line-height: 33px;
+    text-align: center;
+    padding: 22.25px 0 14px;
+  }
+}

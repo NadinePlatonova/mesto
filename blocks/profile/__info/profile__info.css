@@ -4,5 +4,16 @@
   grid-template-rows: minmax(min-content, max-content) minmax(min-content, max-content);
   grid-template-areas:
   "image name button"
-  "image role ."
+  "image role .";
+}
+
+@media screen and (min-width: 320px) and (max-width: 1139px) {
+  .profile__info {
+    grid-template-areas:
+    "image ."
+    "name button"
+    "role .";
+    justify-content: center;
+    align-items: center;
+  }
 }
