@@ -10,4 +10,10 @@
   color: #fff;
   border: 0;
   cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+
+.popup__close:hover {
+  opacity: 0.6;
+  transition: opacity 0.1s ease;
 }

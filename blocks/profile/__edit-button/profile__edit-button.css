@@ -9,4 +9,10 @@
   box-sizing: border-box;
   cursor: pointer;
   grid-area: button;
+  transition: opacity 0.5s ease;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+  transition: opacity 0.1s ease;
 }

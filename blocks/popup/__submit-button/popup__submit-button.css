@@ -9,4 +9,10 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+  transition: opacity 0.5s ease;
+}
+
+.popup__submit-button:hover {
+  opacity: 0.8;
+  transition: opacity 0.1s ease;
 }
