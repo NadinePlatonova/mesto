@@ -18,3 +18,14 @@
   opacity: 0.6;
   transition: opacity 0.1s ease;
 }
+
+@media screen and (min-width: 320px) and (max-width: 1139px) {
+  .popup__close {
+    background-image: url(../../../images/close-icon_small.svg);
+    width: 36px;
+    height: 36px;
+    top: -47px;
+    right: 0;
+    padding: 7px;
+  }
+}
