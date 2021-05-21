@@ -1,9 +1,9 @@
-.footer__container {
+.footer_container {
   margin: 67px auto 60px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 1139px) {
-  .footer__container {
+  .footer_container {
     margin: 48px auto 36px;
   }
 }
