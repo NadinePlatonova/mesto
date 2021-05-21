@@ -18,7 +18,7 @@
                 <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Аватар профиля Жак-Ив Кусто">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__role">Исследователь океана</p>
-                <button type="button" class="profile__edit-button popup-open" aria-label="Редактировать профиль"></button>
+                <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
             </div>
             <button type="button" class="profile__add-button"></button>
         </section>
@@ -77,13 +77,13 @@
     </footer>
 
     <section class="popup">
-        <div class="popup__container">
+        <form class="popup__container" action="#">
             <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
-            <input type="text" placeholder="Жак-Ив Кусто" class="popup__text popup__text_type_name">
-            <input type="text" placeholder="Исследователь океана" class="popup__text popup__text_type_role">
+            <input type="text" placeholder="Имя" class="popup__text popup__text_type_name">
+            <input type="text" placeholder="О себе" class="popup__text popup__text_type_role">
             <button type="submit" class="popup__submit-button" aria-label="Сохранить">Сохранить</button>
-        </div>
+        </form>
     </section>
 
     <script src="scripts/script.js"></script>
