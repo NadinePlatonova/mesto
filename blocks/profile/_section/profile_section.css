@@ -1,9 +1,0 @@
-.profile_section {
-  margin: 0 0 51px;
-}
-
-@media screen and (min-width: 320px) and (max-width: 1139px) {
-  .profile_section {
-    margin: 0 auto 36px;
-  }
-}
