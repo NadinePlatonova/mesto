@@ -1,11 +1,13 @@
 .header {
-  width: 100%;
+  width: calc(100% - 200px*2);
   padding: 0;
   margin: 45px auto 40px;
+  border-bottom: 1px solid #545454;
 }
 
 @media screen and (min-width: 320px) and (max-width: 1139px) {
   .header {
+    width: 100%;
     margin: 28px auto 42px;
   }
 }

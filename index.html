@@ -4,16 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="pages/index.css">
-  <title>Mesto</title>
+  <title>Место</title>
 </head>
 <body class="root">
-    <header class="header header_container">
+    <header class="header">
         <img class="header__logo" src="images/logo.svg" alt="Логотип Место">
-        <div class="header__line"></div>
     </header>
 
-    <main class="content content_container">
-        <section class="profile profile_section">
+    <main class="content">
+        <section class="profile">
             <div class="profile__info">
                 <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Аватар профиля Жак-Ив Кусто">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -77,13 +76,15 @@
     </footer>
 
     <section class="popup">
-        <form class="popup__container" action="#">
+        <div class="popup__container">
             <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
-            <h3 class="popup__title">Редактировать профиль</h3>
-            <input type="text" placeholder="Имя" class="popup__text popup__text_type_name">
-            <input type="text" placeholder="О себе" class="popup__text popup__text_type_role">
-            <button type="submit" class="popup__submit-button" aria-label="Сохранить">Сохранить</button>
-        </form>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="popup__form" action="#" name="profileForm">
+                <input type="text" placeholder="Имя" class="popup__text popup__text_type_name">
+                <input type="text" placeholder="О себе" class="popup__text popup__text_type_role">
+                <button type="submit" class="popup__submit-button" aria-label="Сохранить">Сохранить</button>
+            </form>
+        </div>
     </section>
 
     <script src="scripts/script.js"></script>
