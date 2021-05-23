@@ -7,6 +7,9 @@
   grid-area: name;
   padding: 22px 0 16px;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 320px) and (max-width: 1139px) {
