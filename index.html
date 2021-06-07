@@ -24,7 +24,8 @@
 
         <section class="elements">
             <ul class="elements__list">
-                <li class="element">
+                <!-- <li class="element">
+                    <button type="button" class="element__delete-button" aria-label="Удалить"></button>
                     <img class="element__image" src="images/karachaevsk.jpg" alt="Фотография Карачаевска">
                     <div class="element__info">
                         <h2 class="element__title">Карачаевск</h2>
@@ -32,6 +33,7 @@
                     </div>
                 </li>
                 <li class="element">
+                    <button type="button" class="element__delete-button" aria-label="Удалить"></button>
                     <img class="element__image" src="images/elbrus.jpg" alt="Фотография Эльбруса">
                     <div class="element__info">
                         <h2 class="element__title">Гора Эльбрус</h2>
@@ -39,6 +41,7 @@
                     </div>
                 </li>
                 <li class="element">
+                    <button type="button" class="element__delete-button" aria-label="Удалить"></button>
                     <img class="element__image" src="images/dombai.jpg" alt="Фотография Домбая">
                     <div class="element__info">
                         <h2 class="element__title">Домбай</h2>
@@ -46,6 +49,7 @@
                     </div>
                 </li>
                 <li class="element">
+                    <button type="button" class="element__delete-button" aria-label="Удалить"></button>
                     <img class="element__image" src="images/elbrus.jpg" alt="Фотография Эльбруса">
                     <div class="element__info">
                         <h2 class="element__title">Гора Эльбрус</h2>
@@ -53,6 +57,7 @@
                     </div>
                 </li>
                 <li class="element">
+                    <button type="button" class="element__delete-button" aria-label="Удалить"></button>
                     <img class="element__image" src="images/dombai.jpg" alt="Фотография Домбая">
                     <div class="element__info">
                         <h2 class="element__title">Домбай</h2>
@@ -60,12 +65,13 @@
                     </div>
                 </li>
                 <li class="element">
+                    <button type="button" class="element__delete-button" aria-label="Удалить"></button>
                     <img class="element__image" src="images/karachaevsk.jpg" alt="Фотография Карачаево-Черкесии">
                     <div class="element__info">
                         <h2 class="element__title">Карачаево-Черкесия</h2>
                         <button type="button" class="element__like-button" aria-label="Лайк"></button>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </section>
 
@@ -75,7 +81,7 @@
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
 
-    <section class="popup">
+    <section class="popup popup_type_edit">
         <div class="popup__container">
             <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -86,6 +92,37 @@
             </form>
         </div>
     </section>
+
+    <section class="popup popup_type_new-item">
+        <div class="popup__container">
+            <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" action="#" name="newItemForm">
+                <input type="text" name="place" placeholder="Название" class="popup__text popup__text_type_place">
+                <input type="text" name="link" placeholder="Ссылка на картинку" class="popup__text popup__text_type_link">
+                <button type="submit" class="popup__submit-button" aria-label="Создать">Создать</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="popup popup_type_image">
+        <div class="popup__image-container">
+            <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
+            <img class="popup__image" src="" alt="">
+            <h2 class="popup__name"></h2>
+        </div>
+    </section>
+
+    <template id="element-template">
+        <li class="element">
+            <button type="button" class="element__delete-button" aria-label="Удалить"></button>
+            <img class="element__image" src="" alt="">
+            <div class="element__info">
+                <h2 class="element__title"></h2>
+                <button type="button" class="element__like-button" aria-label="Лайк"></button>
+            </div>
+        </li>
+    </template>
 
     <script src="scripts/script.js"></script>
 

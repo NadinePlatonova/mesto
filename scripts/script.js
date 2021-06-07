@@ -7,6 +7,50 @@ let jobInput = document.querySelector('.popup__text_type_role');
 let nameProfile = document.querySelector('.profile__name');
 let roleProfile = document.querySelector('.profile__role');
 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const elementTemplate = document.querySelector('#element-template').content;
+const elementsList = document.querySelector('.elements__list');
+
+function renderInitialCards() {
+  initialCards.forEach(renderInitialCard);
+}
+
+function renderInitialCard({name, link}) {
+  const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
+  cardElement.querySelector('.element__title').textContent = name;
+  cardElement.querySelector('.element__image').src = link;
+  cardElement.querySelector('.element__image').alt = name;
+  elementsList.append(cardElement);
+}
+
+renderInitialCards();
+
 function openPopupForm () {
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
