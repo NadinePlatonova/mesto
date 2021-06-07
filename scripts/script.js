@@ -41,15 +41,25 @@ function renderInitialCards() {
   initialCards.forEach(renderInitialCard);
 }
 
-function renderInitialCard({name, link}) {
+function renderInitialCard ({name, link}) {
   const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
   cardElement.querySelector('.element__title').textContent = name;
   cardElement.querySelector('.element__image').src = link;
   cardElement.querySelector('.element__image').alt = name;
+  cardElement.querySelector('.element__like-button').addEventListener('click', likeStatus);
+  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
   elementsList.append(cardElement);
 }
 
 renderInitialCards();
+
+function likeStatus (evt) {
+  evt.target.classList.toggle('element__like-button_active');
+}
+
+function deleteCard (evt) {
+  evt.target.closest('.element').remove();
+}
 
 function openPopupForm () {
   nameInput.value = nameProfile.textContent
