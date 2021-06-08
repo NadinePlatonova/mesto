@@ -41,17 +41,22 @@ function renderInitialCards() {
   initialCards.forEach(renderInitialCard);
 }
 
-function renderInitialCard ({name, link}) {
-  const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
-  cardElement.querySelector('.element__title').textContent = name;
-  cardElement.querySelector('.element__image').src = link;
-  cardElement.querySelector('.element__image').alt = name;
-  cardElement.querySelector('.element__like-button').addEventListener('click', likeStatus);
-  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-  elementsList.append(cardElement);
+function renderInitialCard (item) {
+  const card = createCard(item);
+  elementsList.append(card);
 }
 
 renderInitialCards();
+
+function createCard (item) {
+  const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
+  cardElement.querySelector('.element__title').textContent = item.name;
+  cardElement.querySelector('.element__image').src = item.link;
+  cardElement.querySelector('.element__image').alt = item.name;
+  cardElement.querySelector('.element__like-button').addEventListener('click', likeStatus);
+  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
+  return cardElement;
+}
 
 function likeStatus (evt) {
   evt.target.classList.toggle('element__like-button_active');
