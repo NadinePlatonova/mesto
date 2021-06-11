@@ -1,12 +1,3 @@
-let openPopup = document.querySelector('.profile__edit-button');
-let popup = document.querySelector('body > .popup');
-let closePopup = document.querySelector('.popup__close');
-let formElement = document.querySelector('.popup__form');
-let nameInput = document.querySelector('.popup__text_type_name');
-let jobInput = document.querySelector('.popup__text_type_role');
-let nameProfile = document.querySelector('.profile__name');
-let roleProfile = document.querySelector('.profile__role');
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -34,9 +25,33 @@ const initialCards = [
   }
 ];
 
-const elementTemplate = document.querySelector('#element-template').content;
+const nameProfile = document.querySelector('.profile__name');
+const roleProfile = document.querySelector('.profile__role');
+const openPopupEdit = document.querySelector('.profile__edit-button');
+const openPopupAddCard = document.querySelector('.profile__add-button');
 const elementsList = document.querySelector('.elements__list');
+const elementTemplate = document.querySelector('#element-template').content;
+const popups = document.querySelectorAll('.popup');
 
+// Редактирование профиля
+const popupEdit = document.querySelector('.popup_type_edit');
+const closePopupEdit = popupEdit.querySelector('.popup__close');
+const formElement = popupEdit.querySelector('.popup__form');
+const nameInput = formElement.querySelector('.popup__text_type_name');
+const jobInput = formElement.querySelector('.popup__text_type_role');
+
+// Добавление новой карточки
+const popupAddCard = document.querySelector('.popup_type_new-card');
+const closePopupAddCard = popupAddCard.querySelector('.popup__close');
+const formPopupAddCard = popupAddCard.querySelector('.popup__form');
+
+// Попап с картинкой
+const popupImage = document.querySelector('.popup_type_image');
+const openPopupImage = popupImage.querySelector('.popup__image');
+const namePopupImage = popupImage.querySelector('.popup__name');
+const closePopupImage = popupImage.querySelector('.popup__close');
+
+// Функции
 function renderInitialCards() {
   initialCards.forEach(renderInitialCard);
 }
@@ -64,6 +79,18 @@ function likeStatus (evt) {
 
 function deleteCard (evt) {
   evt.target.closest('.element').remove();
+}
+
+popups.forEach((item) => {
+  item.addEventListener('click', (evt) => {
+    if (evt.target.classlist.contains('popup') || evt.target.classList.contains('popup__close')) {
+      closePopup(item);
+    }
+  })
+})
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }
 
 function openPopupForm () {
