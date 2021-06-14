@@ -31,7 +31,6 @@ const openPopupEdit = document.querySelector('.profile__edit-button');
 const openPopupAddCard = document.querySelector('.profile__add-button');
 const elementsList = document.querySelector('.elements__list');
 const elementTemplate = document.querySelector('#element-template').content;
-// const popup = document.querySelector('.popup');
 const popups = document.querySelectorAll('.popup');
 
 // Редактирование профиля
@@ -83,10 +82,12 @@ function deleteCard (evt) {
 }
 
 popups.forEach((item) => {
-  item.addEventListener('click', (evt) => {
-    if (evt.target.classlist.contains('popup') || evt.target.classList.contains('popup__close')) {
-      closePopup(item);
-    }
+  item.addEventListener("click", (evt) => {
+      if (evt.target.classList.contains("popup") || evt.target.classList.contains("popup__close")) {
+        
+          closePopup(item)
+          
+      }
   })
 })
 
@@ -104,6 +105,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+// Редактирование профиля
 function formSubmitHandler (evt) {
   evt.preventDefault();
   nameProfile.textContent = nameInput.value
@@ -111,7 +113,12 @@ function formSubmitHandler (evt) {
   closePopup(popupEdit);
 }
 
-popupEdit.addEventListener('click', openPopupForm);
-// popups.addEventListener('click', openPopup);
-// popups.addEventListener('click', closePopup);
+//Открытие модального окна "Добавление карточек"
+function handlePopupNewCardOpen() {
+  openPopup(popupAddCard);
+  formPopupAddCard.reset();
+}
+
+openPopupEdit.addEventListener('click', openPopupForm);
+openPopupAddCard.addEventListener('click', handlePopupNewCardOpen);
 formElement.addEventListener('submit', formSubmitHandler);
