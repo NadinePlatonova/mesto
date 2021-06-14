@@ -27,63 +27,85 @@ const initialCards = [
 
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
-const openPopupEdit = document.querySelector('.profile__edit-button');
-const openPopupAddCard = document.querySelector('.profile__add-button');
-const elementsList = document.querySelector('.elements__list');
 const elementTemplate = document.querySelector('#element-template').content;
+const placesList = document.querySelector(".elements__list");
 const popups = document.querySelectorAll('.popup');
 
 // Редактирование профиля
+const openPopupEdit = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit');
-const closePopupEdit = popupEdit.querySelector('.popup__close');
 const formElement = popupEdit.querySelector('.popup__form');
 const nameInput = formElement.querySelector('.popup__text_type_name');
 const jobInput = formElement.querySelector('.popup__text_type_role');
 
 // Добавление новой карточки
-const popupAddCard = document.querySelector('.popup_type_new-card');
-const closePopupAddCard = popupAddCard.querySelector('.popup__close');
-const formPopupAddCard = popupAddCard.querySelector('.popup__form');
+const placeButtonAdd = document.querySelector(".profile__add-button");
+const popupNewCard = document.querySelector('.popup_type_new-card');
+const formNewCard = popupNewCard.querySelector(".popup__form")
+const placeInput = formNewCard.querySelector('.popup__text_type_place');
+const imgInput = formNewCard.querySelector(".popup__text_type_link");
+const submitButtonAddForm = formNewCard.querySelector('.popup__submit'); 
 
 // Попап с картинкой
 const popupImage = document.querySelector('.popup_type_image');
-const openPopupImage = popupImage.querySelector('.popup__image');
+const placeImage = popupImage.querySelector('.popup__image');
 const namePopupImage = popupImage.querySelector('.popup__name');
-const closePopupImage = popupImage.querySelector('.popup__close');
 
 // Функции
-function renderInitialCards() {
-  initialCards.forEach(renderInitialCard);
+
+function renderItemsStart() {
+  initialCards.forEach((item) => {
+      renderItem(item.name, item.link)
+  })
+}
+renderItemsStart()
+//Рендер карточки
+function renderItem(name, link) {
+  const htmlElement = createCard(name, link)
+  placesList.prepend(htmlElement)
+}
+function createCard(name, link) {
+  const cardElement = elementTemplate.cloneNode(true)
+  const elementPic = cardElement.querySelector('.element__image');
+  cardElement.querySelector('.element__title').textContent = name
+  elementPic.src = link
+  elementPic.alt = name
+
+  likeStatus(cardElement);
+  deleteCard(cardElement);
+  openImage(cardElement, name, link);
+  
+  return cardElement
 }
 
-function renderInitialCard (item) {
-  const card = createCard(item);
-  elementsList.append(card);
+// Функция открытия попапа с изображением
+function openImage (cardElement, name, link) {
+  cardElement.querySelector('.element__image').addEventListener('click', () => {
+    placeImage.src = link
+    placeImage.alt = name
+    namePopupImage.textContent = name
+    openPopup(popupImage);
+  })
 }
 
-renderInitialCards();
-
-function createCard (item) {
-  const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
-  cardElement.querySelector('.element__title').textContent = item.name;
-  cardElement.querySelector('.element__image').src = item.link;
-  cardElement.querySelector('.element__image').alt = item.name;
-  cardElement.querySelector('.element__like-button').addEventListener('click', likeStatus);
-  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-  return cardElement;
+// Функция лайка карточки
+function likeStatus (cardElement) {
+  cardElement.querySelector('.element__like-button').addEventListener('click', (cardElement) => {
+    cardElement.target.classList.toggle('element__like-button_active');
+  })
 }
 
-function likeStatus (evt) {
-  evt.target.classList.toggle('element__like-button_active');
+// Функция удаления карточки
+function deleteCard (cardElement) {
+  cardElement.querySelector('.element__delete-button').addEventListener('click', (cardElement) => {
+  cardElement.target.closest('.element').remove();
+  })
 }
 
-function deleteCard (evt) {
-  evt.target.closest('.element').remove();
-}
-
+// Универсальная функция закрытия попапов
 popups.forEach((item) => {
-  item.addEventListener("click", (evt) => {
-      if (evt.target.classList.contains("popup") || evt.target.classList.contains("popup__close")) {
+  item.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
         
           closePopup(item)
           
@@ -91,16 +113,19 @@ popups.forEach((item) => {
   })
 })
 
+// Открыть попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
+// Открыть форму редактирования профиля
 function openPopupForm () {
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
   openPopup(popupEdit);
 }
 
+// Закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
@@ -113,12 +138,20 @@ function formSubmitHandler (evt) {
   closePopup(popupEdit);
 }
 
-//Открытие модального окна "Добавление карточек"
+// Открытие модального окна "Добавление карточек"
 function handlePopupNewCardOpen() {
-  openPopup(popupAddCard);
-  formPopupAddCard.reset();
+  openPopup(popupNewCard)
+  formNewCard.reset()
 }
 
-openPopupEdit.addEventListener('click', openPopupForm);
-openPopupAddCard.addEventListener('click', handlePopupNewCardOpen);
+// Добавление карточки с новыми значениями
+function handlePopupNewCardSubmit(evt) {
+  evt.preventDefault()
+  renderItem(placeInput.value, imgInput.value);
+  closePopup(popupNewCard);
+}
+ 
+openPopupEdit.addEventListener("click", openPopupForm);
 formElement.addEventListener('submit', formSubmitHandler);
+placeButtonAdd.addEventListener("click", handlePopupNewCardOpen);
+formNewCard.addEventListener("submit", handlePopupNewCardSubmit);
