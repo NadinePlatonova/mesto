@@ -115,14 +115,8 @@ popups.forEach((item) => {
 
 // Открыть попап
 function openPopup(popup) {
+  document.addEventListener('keydown', handleEscUp);
   popup.classList.add('popup_opened');
-}
-
-// Открыть форму редактирования профиля
-function openPopupForm () {
-  nameInput.value = nameProfile.textContent
-  jobInput.value = roleProfile.textContent
-  openPopup(popupEdit);
 }
 
 // Закрыть попап
@@ -134,10 +128,16 @@ function closePopup(popup) {
 // Закрыть попап на Esc
 function handleEscUp (evt) {
   if (evt.key === 'Escape') {
-    const activePopup = document.querySelector('popup_opened');
+    const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   }
+}
 
+// Открыть форму редактирования профиля
+function openPopupForm () {
+  nameInput.value = nameProfile.textContent
+  jobInput.value = roleProfile.textContent
+  openPopup(popupEdit);
 }
 
 // Редактирование профиля
