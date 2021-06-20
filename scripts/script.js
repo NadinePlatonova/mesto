@@ -128,6 +128,16 @@ function openPopupForm () {
 // Закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscUp);
+}
+
+// Закрыть попап на Esc
+function handleEscUp (evt) {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('popup_opened');
+    closePopup(activePopup);
+  }
+
 }
 
 // Редактирование профиля
