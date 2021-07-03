@@ -1,3 +1,12 @@
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__text_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -34,9 +43,9 @@ const popups = document.querySelectorAll('.popup');
 // Редактирование профиля
 const openPopupEdit = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit');
-const formElement = popupEdit.querySelector('.popup__form');
-const nameInput = formElement.querySelector('.popup__text_type_name');
-const jobInput = formElement.querySelector('.popup__text_type_role');
+const formPopupEdit = popupEdit.querySelector('.popup__form');
+const nameInput = formPopupEdit.querySelector('.popup__text_type_name');
+const jobInput = formPopupEdit.querySelector('.popup__text_type_role');
 
 // Добавление новой карточки
 const placeButtonAdd = document.querySelector(".profile__add-button");
@@ -162,6 +171,6 @@ function handlePopupNewCardSubmit(evt) {
 }
  
 openPopupEdit.addEventListener("click", openPopupForm);
-formElement.addEventListener('submit', formSubmitHandler);
+formPopupEdit.addEventListener('submit', formSubmitHandler);
 placeButtonAdd.addEventListener("click", handlePopupNewCardOpen);
 formNewCard.addEventListener("submit", handlePopupNewCardSubmit);
