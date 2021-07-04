@@ -33,7 +33,6 @@ const checkInputValidity = (formElement, inputElement, {errorClass, inputErrorCl
   };
 // Показ ошибок инпутов
 const showInputError = (formElement, inputElement, errorMessage, {errorClass, inputErrorClass, ...rest}) => {
-    console.log(inputElement.id);
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
