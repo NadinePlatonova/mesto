@@ -126,6 +126,7 @@ popups.forEach((item) => {
 function openPopup(popup) {
   document.addEventListener('keydown', handleEscUp);
   popup.classList.add('popup_opened');
+  deleteInputErrors();
 }
 
 // Закрыть попап
@@ -168,6 +169,15 @@ function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
   renderItem(placeInput.value, imgInput.value);
   closePopup(popupNewCard);
+}
+
+// Функция сброса ошибок у полей ввода форм
+function deleteInputErrors() {
+  const form = document.querySelector(config.formSelector);
+  const inputList = form.querySelectorAll(config.inputSelector);
+  inputList.forEach((input) => {
+    hideInputError(form, input, config);
+  })
 }
  
 openPopupEdit.addEventListener("click", openPopupForm);
