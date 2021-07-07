@@ -7,32 +7,6 @@ const config = {
   errorClass: 'popup__error_visible'
 };
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
@@ -126,7 +100,6 @@ popups.forEach((item) => {
 function openPopup(popup) {
   document.addEventListener('keydown', handleEscUp);
   popup.classList.add('popup_opened');
-  deleteInputErrors();
 }
 
 // Закрыть попап
@@ -145,13 +118,14 @@ function handleEscUp (evt) {
 
 // Открыть форму редактирования профиля
 function openPopupForm () {
+  deleteInputErrors(config);
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
   openPopup(popupEdit);
 }
 
 // Редактирование профиля
-function formSubmitHandler (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   nameProfile.textContent = nameInput.value
   roleProfile.textContent = jobInput.value
@@ -160,6 +134,7 @@ function formSubmitHandler (evt) {
 
 // Открытие модального окна "Добавление карточек"
 function handlePopupNewCardOpen() {
+  deleteInputErrors(config);
   openPopup(popupNewCard)
   formNewCard.reset()
 }
@@ -168,19 +143,11 @@ function handlePopupNewCardOpen() {
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
   renderItem(placeInput.value, imgInput.value);
+  deleteInputErrors(config);
   closePopup(popupNewCard);
 }
-
-// Функция сброса ошибок у полей ввода форм
-function deleteInputErrors() {
-  const form = document.querySelector(config.formSelector);
-  const inputList = form.querySelectorAll(config.inputSelector);
-  inputList.forEach((input) => {
-    hideInputError(form, input, config);
-  })
-}
  
-openPopupEdit.addEventListener("click", openPopupForm);
-formPopupEdit.addEventListener('submit', formSubmitHandler);
-placeButtonAdd.addEventListener("click", handlePopupNewCardOpen);
-formNewCard.addEventListener("submit", handlePopupNewCardSubmit);
+openPopupEdit.addEventListener('click', openPopupForm);
+formPopupEdit.addEventListener('submit', handleProfileFormSubmit);
+placeButtonAdd.addEventListener('click', handlePopupNewCardOpen);
+formNewCard.addEventListener('submit', handlePopupNewCardSubmit);
