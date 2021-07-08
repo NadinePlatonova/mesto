@@ -100,6 +100,8 @@ popups.forEach((item) => {
 function openPopup(popup) {
   document.addEventListener('keydown', handleEscUp);
   popup.classList.add('popup_opened');
+
+  // setSubmitButtonState(config);
 }
 
 // Закрыть попап
@@ -118,6 +120,7 @@ function handleEscUp (evt) {
 
 // Открыть форму редактирования профиля
 function openPopupForm () {
+  // setSubmitButtonState(config);
   deleteInputErrors(config);
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
