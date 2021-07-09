@@ -100,8 +100,6 @@ popups.forEach((item) => {
 function openPopup(popup) {
   document.addEventListener('keydown', handleEscUp);
   popup.classList.add('popup_opened');
-
-  // setSubmitButtonState(config);
 }
 
 // Закрыть попап
@@ -120,7 +118,7 @@ function handleEscUp (evt) {
 
 // Открыть форму редактирования профиля
 function openPopupForm () {
-  // setSubmitButtonState(config);
+  setSubmitButtonActive();
   deleteInputErrors(config);
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
@@ -137,6 +135,7 @@ function handleProfileFormSubmit (evt) {
 
 // Открытие модального окна "Добавление карточек"
 function handlePopupNewCardOpen() {
+  setSubmitButtonInactive();
   deleteInputErrors(config);
   openPopup(popupNewCard)
   formNewCard.reset()
@@ -147,6 +146,7 @@ function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
   renderItem(placeInput.value, imgInput.value);
   deleteInputErrors(config);
+  setSubmitButtonInactive();
   closePopup(popupNewCard);
 }
  

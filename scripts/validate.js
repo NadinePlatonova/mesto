@@ -51,17 +51,30 @@ const hasInvalidInput = (inputList) => {
     return !inputElement.validity.valid;
   })
 };
-
-const toggleButtonState = (inputList, buttonElement) => {
+// Состояние сабмита при валидации полей
+const toggleButtonState = (inputList) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
+    setSubmitButtonInactive();
 } else {
-  buttonElement.classList.remove(config.inactiveButtonClass);
-  buttonElement.removeAttribute('disabled');
-}
-}
-
+  setSubmitButtonActive();
+  }
+};
+// Активное состояние сабмита
+const setSubmitButtonActive = () => {
+  const buttons = document.querySelectorAll(config.submitButtonSelector);
+  buttons.forEach((button) => {
+    button.classList.remove(config.inactiveButtonClass);
+    button.removeAttribute('disabled');
+  })
+};
+// Неактивное состояние сабмита
+const setSubmitButtonInactive = () => {
+  const buttons = document.querySelectorAll(config.submitButtonSelector);
+  buttons.forEach((button) => {
+    button.classList.add(config.inactiveButtonClass);
+    button.setAttribute('disabled', true);
+  })
+};
 // Функция сброса ошибок у полей ввода форм
 const deleteInputErrors = (config) => {
   const forms = [...document.querySelectorAll(config.formSelector)];
