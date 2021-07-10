@@ -52,37 +52,28 @@ const hasInvalidInput = (inputList) => {
   })
 };
 // Состояние сабмита при валидации полей
-const toggleButtonState = (inputList) => {
+const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    setSubmitButtonInactive();
+    setSubmitButtonInactive(buttonElement, config);
 } else {
-  setSubmitButtonActive();
+  setSubmitButtonActive(buttonElement, config);
   }
 };
 // Активное состояние сабмита
-const setSubmitButtonActive = () => {
-  const buttons = document.querySelectorAll(config.submitButtonSelector);
-  buttons.forEach((button) => {
-    button.classList.remove(config.inactiveButtonClass);
-    button.removeAttribute('disabled');
-  })
+const setSubmitButtonActive = (buttonElement, config) => {
+  buttonElement.classList.remove(config.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled');
 };
 // Неактивное состояние сабмита
-const setSubmitButtonInactive = () => {
-  const buttons = document.querySelectorAll(config.submitButtonSelector);
-  buttons.forEach((button) => {
-    button.classList.add(config.inactiveButtonClass);
-    button.setAttribute('disabled', true);
-  })
+const setSubmitButtonInactive = (buttonElement, config) => {
+  buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
 };
 // Функция сброса ошибок у полей ввода форм
-const deleteInputErrors = (config) => {
-  const forms = [...document.querySelectorAll(config.formSelector)];
-  forms.forEach((formElement) => {
-    const inputList = [...formElement.querySelectorAll(config.inputSelector)];
-    inputList.forEach((inputElement) => {
-      hideInputError(formElement, inputElement, config);
-    })
+const deleteInputErrors = (formElement) => {
+  const inputList = formElement.querySelectorAll(config.inputSelector);
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, config);
   })
 };
 

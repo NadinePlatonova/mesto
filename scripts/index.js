@@ -20,6 +20,7 @@ const popupEdit = document.querySelector('.popup_type_edit');
 const formPopupEdit = popupEdit.querySelector('.popup__form');
 const nameInput = formPopupEdit.querySelector('.popup__text_type_name');
 const jobInput = formPopupEdit.querySelector('.popup__text_type_role');
+const submitButtonPopupEdit = formPopupEdit.querySelector('.popup__submit-button');
 
 // Добавление новой карточки
 const placeButtonAdd = document.querySelector(".profile__add-button");
@@ -27,7 +28,7 @@ const popupNewCard = document.querySelector('.popup_type_new-card');
 const formNewCard = popupNewCard.querySelector(".popup__form")
 const placeInput = formNewCard.querySelector('.popup__text_type_place');
 const imgInput = formNewCard.querySelector(".popup__text_type_link");
-const submitButtonAddForm = formNewCard.querySelector('.popup__submit'); 
+const submitButtonAddForm = formNewCard.querySelector('.popup__submit-button'); 
 
 // Попап с картинкой
 const popupImage = document.querySelector('.popup_type_image');
@@ -118,8 +119,8 @@ function handleEscUp (evt) {
 
 // Открыть форму редактирования профиля
 function openPopupForm () {
-  setSubmitButtonActive();
-  deleteInputErrors(config);
+  setSubmitButtonActive(submitButtonPopupEdit, config);
+  deleteInputErrors(formPopupEdit);
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
   openPopup(popupEdit);
@@ -135,8 +136,8 @@ function handleProfileFormSubmit (evt) {
 
 // Открытие модального окна "Добавление карточек"
 function handlePopupNewCardOpen() {
-  setSubmitButtonInactive();
-  deleteInputErrors(config);
+  setSubmitButtonInactive(submitButtonAddForm, config);
+  deleteInputErrors(formNewCard);
   openPopup(popupNewCard)
   formNewCard.reset()
 }
@@ -145,8 +146,8 @@ function handlePopupNewCardOpen() {
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
   renderItem(placeInput.value, imgInput.value);
-  deleteInputErrors(config);
-  setSubmitButtonInactive();
+  deleteInputErrors(formNewCard);
+  setSubmitButtonInactive(submitButtonAddForm, config);
   closePopup(popupNewCard);
 }
  
