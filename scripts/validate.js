@@ -11,15 +11,15 @@ const enableValidation = ({formSelector, ...rest}) => {
   })
 };
 // Накладываем на инпуты обработчики по событию ввода текста в поле
-const setEventListeners = (formElement, {inputSelector, submitButtonSelector, errorClass, inputErrorClass, ...rest}) => {
+const setEventListeners = (formElement, {inputSelector, submitButtonSelector, inactiveButtonClass, errorClass, inputErrorClass, ...rest}) => {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, config);
+  toggleButtonState(inputList, buttonElement, {inactiveButtonClass});
 
   inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
           checkInputValidity(formElement, inputElement, {errorClass, inputErrorClass});
-          toggleButtonState(inputList, buttonElement, config);
+          toggleButtonState(inputList, buttonElement, {inactiveButtonClass});
       })
   })
 };
