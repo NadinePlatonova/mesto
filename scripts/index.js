@@ -120,7 +120,7 @@ function handleEscUp (evt) {
 // Открыть форму редактирования профиля
 function openPopupForm () {
   setSubmitButtonActive(submitButtonPopupEdit, config);
-  deleteInputErrors(formPopupEdit);
+  deleteInputErrors(formPopupEdit, config);
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
   openPopup(popupEdit);
@@ -137,7 +137,7 @@ function handleProfileFormSubmit (evt) {
 // Открытие модального окна "Добавление карточек"
 function handlePopupNewCardOpen() {
   setSubmitButtonInactive(submitButtonAddForm, config);
-  deleteInputErrors(formNewCard);
+  deleteInputErrors(formNewCard, config);
   openPopup(popupNewCard)
   formNewCard.reset()
 }
@@ -146,7 +146,7 @@ function handlePopupNewCardOpen() {
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
   renderItem(placeInput.value, imgInput.value);
-  deleteInputErrors(formNewCard);
+  deleteInputErrors(formNewCard, config);
   setSubmitButtonInactive(submitButtonAddForm, config);
   closePopup(popupNewCard);
 }

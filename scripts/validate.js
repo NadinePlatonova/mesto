@@ -14,12 +14,12 @@ const enableValidation = ({formSelector, ...rest}) => {
 const setEventListeners = (formElement, {inputSelector, submitButtonSelector, errorClass, inputErrorClass, ...rest}) => {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, config);
 
   inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
           checkInputValidity(formElement, inputElement, {errorClass, inputErrorClass});
-          toggleButtonState(inputList, buttonElement);
+          toggleButtonState(inputList, buttonElement, config);
       })
   })
 };
@@ -52,7 +52,7 @@ const hasInvalidInput = (inputList) => {
   })
 };
 // Состояние сабмита при валидации полей
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, config) => {
   if (hasInvalidInput(inputList)) {
     setSubmitButtonInactive(buttonElement, config);
 } else {
@@ -70,7 +70,7 @@ const setSubmitButtonInactive = (buttonElement, config) => {
   buttonElement.setAttribute('disabled', true);
 };
 // Функция сброса ошибок у полей ввода форм
-const deleteInputErrors = (formElement) => {
+const deleteInputErrors = (formElement, config) => {
   const inputList = formElement.querySelectorAll(config.inputSelector);
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, config);
