@@ -1,5 +1,5 @@
-import Card from './Card';
-import {initialCards} from './initial-сards.js';
+import Card from './Card.js';
+import { initialCards } from './initial-сards.js';
 
 const config = {
   formSelector: '.popup__form',
@@ -13,8 +13,7 @@ const config = {
 
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
-// const elementTemplate = document.querySelector('#element-template').content;
-// const placesList = document.querySelector(".elements__list");
+const placesList = document.querySelector('.elements__list');
 const popups = document.querySelectorAll('.popup');
 
 // Редактирование профиля
@@ -44,60 +43,11 @@ const renderItems = () => {
     const card = new Card(item, '#element-template');
     const cardElement = card.createCard();
   
-    document.querySelector('.elements__list').prepend(cardElement);
+    placesList.prepend(cardElement);
   })
 }
 
 renderItems();
-
-// function renderItemsStart() {
-//   initialCards.forEach((item) => {
-//       renderItem(item.name, item.link)
-//   })
-// }
-// renderItemsStart()
-//Рендер карточки
-// function renderItem(name, link) {
-//   const htmlElement = createCard(name, link)
-//   placesList.prepend(htmlElement)
-// }
-// function createCard(name, link) {
-//   const cardElement = elementTemplate.cloneNode(true)
-//   const elementPic = cardElement.querySelector('.element__image');
-//   cardElement.querySelector('.element__title').textContent = name
-//   elementPic.src = link
-//   elementPic.alt = name
-
-//   likeStatus(cardElement);
-//   deleteCard(cardElement);
-//   openImage(cardElement, name, link);
-  
-//   return cardElement
-// }
-
-// Функция открытия попапа с изображением
-// function openImage (cardElement, name, link) {
-//   cardElement.querySelector('.element__image').addEventListener('click', () => {
-//     placeImage.src = link
-//     placeImage.alt = name
-//     namePopupImage.textContent = name
-//     openPopup(popupImage);
-//   })
-// }
-
-// Функция лайка карточки
-// function likeStatus (cardElement) {
-//   cardElement.querySelector('.element__like-button').addEventListener('click', (cardElement) => {
-//     cardElement.target.classList.toggle('element__like-button_active');
-//   })
-// }
-
-// // Функция удаления карточки
-// function deleteCard (cardElement) {
-//   cardElement.querySelector('.element__delete-button').addEventListener('click', (cardElement) => {
-//   cardElement.target.closest('.element').remove();
-//   })
-// }
 
 // Универсальная функция закрытия попапов
 popups.forEach((item) => {
@@ -111,7 +61,7 @@ popups.forEach((item) => {
 })
 
 // Открыть попап
-function openPopup(popup) {
+export function openPopup(popup) {
   document.addEventListener('keydown', handleEscUp);
   popup.classList.add('popup_opened');
 }
@@ -158,7 +108,7 @@ function handlePopupNewCardOpen() {
 // Добавление карточки с новыми значениями
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
-  renderItem(placeInput.value, imgInput.value);
+  renderItems(placeInput.value, imgInput.value);
   deleteInputErrors(formNewCard, config);
   setSubmitButtonInactive(submitButtonAddForm, config);
   closePopup(popupNewCard);
