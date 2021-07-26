@@ -1,3 +1,6 @@
+import Card from './Card';
+import {initialCards} from './initial-сards.js';
+
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__text',
@@ -10,8 +13,8 @@ const config = {
 
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
-const elementTemplate = document.querySelector('#element-template').content;
-const placesList = document.querySelector(".elements__list");
+// const elementTemplate = document.querySelector('#element-template').content;
+// const placesList = document.querySelector(".elements__list");
 const popups = document.querySelectorAll('.popup');
 
 // Редактирование профиля
@@ -31,60 +34,70 @@ const imgInput = formNewCard.querySelector(".popup__text_type_link");
 const submitButtonAddForm = formNewCard.querySelector('.popup__submit-button'); 
 
 // Попап с картинкой
-const popupImage = document.querySelector('.popup_type_image');
-const placeImage = popupImage.querySelector('.popup__image');
-const namePopupImage = popupImage.querySelector('.popup__name');
+export const popupImage = document.querySelector('.popup_type_image');
+export const placeImage = popupImage.querySelector('.popup__image');
+export const namePopupImage = popupImage.querySelector('.popup__name');
 
 // Функции
-
-function renderItemsStart() {
+const renderItems = () => {
   initialCards.forEach((item) => {
-      renderItem(item.name, item.link)
+    const card = new Card(item, '#element-template');
+    const cardElement = card.createCard();
+  
+    document.querySelector('.elements__list').prepend(cardElement);
   })
 }
-renderItemsStart()
-//Рендер карточки
-function renderItem(name, link) {
-  const htmlElement = createCard(name, link)
-  placesList.prepend(htmlElement)
-}
-function createCard(name, link) {
-  const cardElement = elementTemplate.cloneNode(true)
-  const elementPic = cardElement.querySelector('.element__image');
-  cardElement.querySelector('.element__title').textContent = name
-  elementPic.src = link
-  elementPic.alt = name
 
-  likeStatus(cardElement);
-  deleteCard(cardElement);
-  openImage(cardElement, name, link);
+renderItems();
+
+// function renderItemsStart() {
+//   initialCards.forEach((item) => {
+//       renderItem(item.name, item.link)
+//   })
+// }
+// renderItemsStart()
+//Рендер карточки
+// function renderItem(name, link) {
+//   const htmlElement = createCard(name, link)
+//   placesList.prepend(htmlElement)
+// }
+// function createCard(name, link) {
+//   const cardElement = elementTemplate.cloneNode(true)
+//   const elementPic = cardElement.querySelector('.element__image');
+//   cardElement.querySelector('.element__title').textContent = name
+//   elementPic.src = link
+//   elementPic.alt = name
+
+//   likeStatus(cardElement);
+//   deleteCard(cardElement);
+//   openImage(cardElement, name, link);
   
-  return cardElement
-}
+//   return cardElement
+// }
 
 // Функция открытия попапа с изображением
-function openImage (cardElement, name, link) {
-  cardElement.querySelector('.element__image').addEventListener('click', () => {
-    placeImage.src = link
-    placeImage.alt = name
-    namePopupImage.textContent = name
-    openPopup(popupImage);
-  })
-}
+// function openImage (cardElement, name, link) {
+//   cardElement.querySelector('.element__image').addEventListener('click', () => {
+//     placeImage.src = link
+//     placeImage.alt = name
+//     namePopupImage.textContent = name
+//     openPopup(popupImage);
+//   })
+// }
 
 // Функция лайка карточки
-function likeStatus (cardElement) {
-  cardElement.querySelector('.element__like-button').addEventListener('click', (cardElement) => {
-    cardElement.target.classList.toggle('element__like-button_active');
-  })
-}
+// function likeStatus (cardElement) {
+//   cardElement.querySelector('.element__like-button').addEventListener('click', (cardElement) => {
+//     cardElement.target.classList.toggle('element__like-button_active');
+//   })
+// }
 
-// Функция удаления карточки
-function deleteCard (cardElement) {
-  cardElement.querySelector('.element__delete-button').addEventListener('click', (cardElement) => {
-  cardElement.target.closest('.element').remove();
-  })
-}
+// // Функция удаления карточки
+// function deleteCard (cardElement) {
+//   cardElement.querySelector('.element__delete-button').addEventListener('click', (cardElement) => {
+//   cardElement.target.closest('.element').remove();
+//   })
+// }
 
 // Универсальная функция закрытия попапов
 popups.forEach((item) => {
