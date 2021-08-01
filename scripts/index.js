@@ -1,15 +1,15 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 import { initialCards } from './initial-сards.js';
 
-const config = {
-  formSelector: '.popup__form',
+export const config = {
+  // formSelector: '.popup__form',
   inputSelector: '.popup__text',
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__text_type_error',
   errorClass: 'popup__error_visible'
 };
-
 
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
@@ -49,6 +49,12 @@ const renderItems = () => {
 
 renderItems();
 
+const editFormValidator = new FormValidator(config, formPopupEdit);
+editFormValidator.enableValidation();
+
+const cardFormValidator = new FormValidator(config, formNewCard);
+cardFormValidator.enableValidation();
+
 // Универсальная функция закрытия попапов
 popups.forEach((item) => {
   item.addEventListener('click', (evt) => {
@@ -82,8 +88,8 @@ function handleEscUp (evt) {
 
 // Открыть форму редактирования профиля
 function openPopupForm () {
-  setSubmitButtonActive(submitButtonPopupEdit, config);
-  deleteInputErrors(formPopupEdit, config);
+  // setSubmitButtonActive();
+  // deleteInputErrors();
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
   openPopup(popupEdit);
@@ -99,8 +105,8 @@ function handleProfileFormSubmit (evt) {
 
 // Открытие модального окна "Добавление карточек"
 function handlePopupNewCardOpen() {
-  setSubmitButtonInactive(submitButtonAddForm, config);
-  deleteInputErrors(formNewCard, config);
+  // setSubmitButtonInactive();
+  // deleteInputErrors();
   openPopup(popupNewCard)
   formNewCard.reset()
 }
@@ -109,8 +115,8 @@ function handlePopupNewCardOpen() {
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
   renderItems(placeInput.value, imgInput.value);
-  deleteInputErrors(formNewCard, config);
-  setSubmitButtonInactive(submitButtonAddForm, config);
+  // deleteInputErrors();
+  // setSubmitButtonInactive();
   closePopup(popupNewCard);
 }
  
