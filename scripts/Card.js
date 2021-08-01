@@ -46,13 +46,13 @@ _handleRemove() {
 
 _setEventListeners() {
   this._element.querySelector('.element__like-button').addEventListener('click', () => {
-      this._likeStatus()
+      this._likeStatus();
   })
   this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-      this._handleRemove()
+      this._handleRemove();
   })
   this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._openImage()
+      this._openImage();
   })
 }
 }

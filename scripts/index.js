@@ -2,8 +2,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import { initialCards } from './initial-сards.js';
 
-export const config = {
-  // formSelector: '.popup__form',
+const config = {
   inputSelector: '.popup__text',
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_disabled',
@@ -22,7 +21,6 @@ const popupEdit = document.querySelector('.popup_type_edit');
 const formPopupEdit = popupEdit.querySelector('.popup__form');
 const nameInput = formPopupEdit.querySelector('.popup__text_type_name');
 const jobInput = formPopupEdit.querySelector('.popup__text_type_role');
-const submitButtonPopupEdit = formPopupEdit.querySelector('.popup__submit-button');
 
 // Добавление новой карточки
 const placeButtonAdd = document.querySelector(".profile__add-button");
@@ -30,7 +28,6 @@ const popupNewCard = document.querySelector('.popup_type_new-card');
 const formNewCard = popupNewCard.querySelector(".popup__form")
 const placeInput = formNewCard.querySelector('.popup__text_type_place');
 const imgInput = formNewCard.querySelector(".popup__text_type_link");
-const submitButtonAddForm = formNewCard.querySelector('.popup__submit-button'); 
 
 // Попап с картинкой
 export const popupImage = document.querySelector('.popup_type_image');
@@ -88,8 +85,8 @@ function handleEscUp (evt) {
 
 // Открыть форму редактирования профиля
 function openPopupForm () {
-  // setSubmitButtonActive();
-  // deleteInputErrors();
+  editFormValidator._setSubmitButtonActive();
+  editFormValidator.deleteInputErrors();
   nameInput.value = nameProfile.textContent
   jobInput.value = roleProfile.textContent
   openPopup(popupEdit);
@@ -105,8 +102,8 @@ function handleProfileFormSubmit (evt) {
 
 // Открытие модального окна "Добавление карточек"
 function handlePopupNewCardOpen() {
-  // setSubmitButtonInactive();
-  // deleteInputErrors();
+  cardFormValidator._setSubmitButtonInactive();
+  cardFormValidator.deleteInputErrors();
   openPopup(popupNewCard)
   formNewCard.reset()
 }
@@ -115,8 +112,8 @@ function handlePopupNewCardOpen() {
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
   renderItems(placeInput.value, imgInput.value);
-  // deleteInputErrors();
-  // setSubmitButtonInactive();
+  cardFormValidator.deleteInputErrors();
+  cardFormValidator._setSubmitButtonInactive();
   closePopup(popupNewCard);
 }
  

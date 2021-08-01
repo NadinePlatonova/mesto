@@ -1,5 +1,3 @@
-import { config } from './index.js'
-
 export default class FormValidator {
   constructor(config, formElement) {
     this._inputSelector = config.inputSelector;
@@ -81,7 +79,7 @@ export default class FormValidator {
 
   deleteInputErrors() {
     this._inputList.forEach((inputElement) => {
-      hideInputError(inputElement);
+      this._hideInputError(inputElement);
     })
   }
 }
