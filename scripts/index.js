@@ -35,17 +35,24 @@ export const placeImage = popupImage.querySelector('.popup__image');
 export const namePopupImage = popupImage.querySelector('.popup__name');
 
 // Функции
-const renderItems = () => {
+
+// Создание карточки
+const renderItem = (name, link, cardSelector) => {
+  const card = new Card(name, link, cardSelector);
+  const cardElement = card.createCard();
+  placesList.prepend(cardElement);
+}
+
+// Рендер карточек
+const renderItemsStart = () => {
   initialCards.forEach((item) => {
-    const card = new Card(item, '#element-template');
-    const cardElement = card.createCard();
-  
-    placesList.prepend(cardElement);
+    renderItem(item.name, item.link, '#element-template');
   })
 }
 
-renderItems();
+renderItemsStart();
 
+// Валидация форм
 const editFormValidator = new FormValidator(config, formPopupEdit);
 editFormValidator.enableValidation();
 
@@ -111,7 +118,7 @@ function handlePopupNewCardOpen() {
 // Добавление карточки с новыми значениями
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
-  renderItems(placeInput.value, imgInput.value);
+  renderItem(placeInput.value, imgInput.value, '#element-template');
   cardFormValidator.deleteInputErrors();
   cardFormValidator._setSubmitButtonInactive();
   closePopup(popupNewCard);
