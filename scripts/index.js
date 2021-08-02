@@ -1,6 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import { initialCards } from './initial-сards.js';
+import { closePopup, openPopup } from './utils.js';
 
 const config = {
   inputSelector: '.popup__text',
@@ -29,25 +30,24 @@ const formNewCard = popupNewCard.querySelector(".popup__form")
 const placeInput = formNewCard.querySelector('.popup__text_type_place');
 const imgInput = formNewCard.querySelector(".popup__text_type_link");
 
-// Попап с картинкой
-export const popupImage = document.querySelector('.popup_type_image');
-export const placeImage = popupImage.querySelector('.popup__image');
-export const namePopupImage = popupImage.querySelector('.popup__name');
-
 // Функции
 
 // Создание карточки
-const renderItem = (name, link, cardSelector) => {
-  const card = new Card(name, link, cardSelector);
-  const cardElement = card.createCard();
-  placesList.prepend(cardElement);
+function createCard(name, link) {
+  const card = new Card(name, link, '#element-template');
+  return card.generateCard();
+}
+
+// Добавление карточки в DOM
+function renderItem(name, link) {
+  placesList.prepend(createCard(name, link));
 }
 
 // Рендер карточек
-const renderItemsStart = () => {
+function renderItemsStart() {
   initialCards.forEach((item) => {
     renderItem(item.name, item.link, '#element-template');
-  })
+  });
 }
 
 renderItemsStart();
@@ -69,26 +69,6 @@ popups.forEach((item) => {
       }
   })
 })
-
-// Открыть попап
-export function openPopup(popup) {
-  document.addEventListener('keydown', handleEscUp);
-  popup.classList.add('popup_opened');
-}
-
-// Закрыть попап
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscUp);
-}
-
-// Закрыть попап на Esc
-function handleEscUp (evt) {
-  if (evt.key === 'Escape') {
-    const activePopup = document.querySelector('.popup_opened');
-    closePopup(activePopup);
-  }
-}
 
 // Открыть форму редактирования профиля
 function openPopupForm () {

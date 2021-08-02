@@ -1,4 +1,4 @@
-import { popupImage, placeImage, namePopupImage, openPopup } from './index.js';
+import { popupImage, placeImage, namePopupImage, openPopup } from './utils.js';
 
 export default class Card {
   constructor(name, link, cardSelector) {
@@ -17,7 +17,7 @@ export default class Card {
   return cardElement;
   }
 
-createCard() {
+generateCard() {
   this._element = this._getTemplate();
   this._elementPic = this._element.querySelector('.element__image');
   this._likeButton = this._element.querySelector('.element__like-button');
