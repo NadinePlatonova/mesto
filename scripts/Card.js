@@ -20,6 +20,7 @@ export default class Card {
 createCard() {
   this._element = this._getTemplate();
   this._elementPic = this._element.querySelector('.element__image');
+  this._likeButton = this._element.querySelector('.element__like-button');
   this._setEventListeners();
   this._element.querySelector('.element__title').textContent = this._name;
   this._elementPic.src = this._link;
@@ -36,7 +37,7 @@ _openImage() {
 }
 
 _likeStatus() {
-  this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
+  this._likeButton.classList.toggle('element__like-button_active');
 }
 
 _handleRemove() {
@@ -45,7 +46,7 @@ _handleRemove() {
 }
 
 _setEventListeners() {
-  this._element.querySelector('.element__like-button').addEventListener('click', () => {
+  this._likeButton.addEventListener('click', () => {
       this._likeStatus();
   })
   this._element.querySelector('.element__delete-button').addEventListener('click', () => {
