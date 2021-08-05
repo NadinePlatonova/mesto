@@ -46,7 +46,7 @@ function renderItem(name, link) {
 // Рендер карточек
 function renderItemsStart() {
   initialCards.forEach((item) => {
-    renderItem(item.name, item.link, '#element-template');
+    renderItem(item.name, item.link);
   });
 }
 
@@ -98,7 +98,7 @@ function handlePopupNewCardOpen() {
 // Добавление карточки с новыми значениями
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
-  renderItem(placeInput.value, imgInput.value, '#element-template');
+  renderItem(placeInput.value, imgInput.value);
   cardFormValidator.deleteInputErrors();
   cardFormValidator._setSubmitButtonInactive();
   closePopup(popupNewCard);
