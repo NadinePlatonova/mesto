@@ -1,7 +1,3 @@
-export const popupImage = document.querySelector('.popup_type_image');
-export const placeImage = popupImage.querySelector('.popup__image');
-export const namePopupImage = popupImage.querySelector('.popup__name');
-
 export function openPopup(popup) {
     document.addEventListener('keydown', handleEscUp);
     popup.classList.add('popup_opened');
