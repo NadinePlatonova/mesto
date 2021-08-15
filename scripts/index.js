@@ -2,6 +2,7 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import { initialCards } from '../utils/constants.js';
 import { closePopup, openPopup } from '../utils/utils.js';
+import Section from '../components/Section.js'
 
 const config = {
   inputSelector: '.popup__text',
@@ -13,7 +14,7 @@ const config = {
 
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
-const placesList = document.querySelector('.elements__list');
+// const placesList = document.querySelector('.elements__list');
 const popups = document.querySelectorAll('.popup');
 
 // Редактирование профиля
@@ -38,19 +39,15 @@ function createCard(name, link) {
   return card.generateCard();
 }
 
-// Добавление карточки в DOM
-function renderItem(name, link) {
-  placesList.prepend(createCard(name, link));
-}
+const renderCardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const cardElement = createCard(item.name, item.link);
+    renderCardList.addItem(cardElement);
+  }
+}, '.elements__list');
 
-// Рендер карточек
-function renderItemsStart() {
-  initialCards.forEach((item) => {
-    renderItem(item.name, item.link);
-  });
-}
-
-renderItemsStart();
+renderCardList.renderItems();
 
 // Валидация форм
 const editFormValidator = new FormValidator(config, formPopupEdit);
@@ -60,15 +57,15 @@ const cardFormValidator = new FormValidator(config, formNewCard);
 cardFormValidator.enableValidation();
 
 // Универсальная функция закрытия попапов
-popups.forEach((item) => {
-  item.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+// popups.forEach((item) => {
+//   item.addEventListener('click', (evt) => {
+//       if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
         
-          closePopup(item)
+//           closePopup(item)
           
-      }
-  })
-})
+//       }
+//   })
+// })
 
 // Открыть форму редактирования профиля
 function openPopupForm () {
