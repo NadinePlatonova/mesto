@@ -1,11 +1,12 @@
-import { popupImage, placeImage, namePopupImage } from '../utils/constants.js';
-import { openPopup } from '../utils/utils.js';
+// import { popupImage, placeImage, namePopupImage } from '../utils/constants.js';
+// import { openPopup } from '../utils/utils.js';
 
 export default class Card {
-  constructor(name, link, cardSelector) {
+  constructor(name, link, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
     }
 
   _getTemplate() {
@@ -30,11 +31,8 @@ generateCard() {
   return this._element;
 }
 
-_openImage() {
-    placeImage.src = this._link
-    placeImage.alt = this._name
-    namePopupImage.textContent = this._name
-    openPopup(popupImage);
+_openImage(name, link) {
+  this._handleCardClick(name, link);
 }
 
 _likeStatus() {
@@ -54,7 +52,7 @@ _setEventListeners() {
       this._handleRemove();
   })
   this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._openImage();
+      this._openImage(this._name, this._link);
   })
 }
 }

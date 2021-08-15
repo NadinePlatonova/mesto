@@ -1,20 +1,24 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import { initialCards } from '../utils/constants.js';
-import { closePopup, openPopup } from '../utils/utils.js';
-import Section from '../components/Section.js'
+import { initialCards, popupImage } from '../utils/constants.js';
+// import { closePopup, openPopup } from '../utils/utils.js';
+import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
 
 const config = {
   inputSelector: '.popup__text',
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__text_type_error',
-  errorClass: 'popup__error_visible'
+  errorClass: 'popup__error_visible',
+  containerSelector: '.elements__list',
+  cardSelector: '#element-template'
 };
 
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
-// const placesList = document.querySelector('.elements__list');
 const popups = document.querySelectorAll('.popup');
 
 // Редактирование профиля
@@ -33,21 +37,25 @@ const imgInput = formNewCard.querySelector(".popup__text_type_link");
 
 // Функции
 
+const handleCardClick = (name, link) => popupImage.open(name, link);
+
 // Создание карточки
 function createCard(name, link) {
-  const card = new Card(name, link, '#element-template');
+  const card = new Card(name, link, config.cardSelector, handleCardClick);
   return card.generateCard();
 }
-
+// Рендер карточек
 const renderCardList = new Section({
   items: initialCards,
   renderer: (item) => {
     const cardElement = createCard(item.name, item.link);
     renderCardList.addItem(cardElement);
   }
-}, '.elements__list');
+}, config.containerSelector);
 
 renderCardList.renderItems();
+
+
 
 // Валидация форм
 const editFormValidator = new FormValidator(config, formPopupEdit);
