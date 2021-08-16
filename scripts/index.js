@@ -25,8 +25,8 @@ const roleProfile = document.querySelector('.profile__role');
 const openPopupEdit = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit');
 const formPopupEdit = popupEdit.querySelector('.popup__form');
-const nameInput = formPopupEdit.querySelector('.popup__text_type_name');
-const jobInput = formPopupEdit.querySelector('.popup__text_type_role');
+// const nameInput = formPopupEdit.querySelector('.popup__text_type_name');
+// const jobInput = formPopupEdit.querySelector('.popup__text_type_role');
 
 // Добавление новой карточки
 const placeButtonAdd = document.querySelector(".profile__add-button");
@@ -38,7 +38,6 @@ const imgInput = formNewCard.querySelector(".popup__text_type_link");
 // Функции
 const openPopupWithImage = new PopupWithImage(config.popupImageSelector);
 const handleCardClick = (name, link) => openPopupWithImage.open(name, link);
-openPopupWithImage.close();
 
 // Создание карточки
 function createCard(name, link) {
@@ -77,12 +76,22 @@ cardFormValidator.enableValidation();
 // })
 
 // Открыть форму редактирования профиля
+
+const editPopup = new PopupWithForm({
+  popupSelector: popupEdit,
+  handleFormSubmit: () => {
+    const user = new UserInfo(nameProfile, roleProfile);
+    user.getUserInfo();
+    user.setUserInfo();
+  }
+})
+
 function openPopupForm () {
   editFormValidator._setSubmitButtonActive();
   editFormValidator.deleteInputErrors();
-  nameInput.value = nameProfile.textContent
-  jobInput.value = roleProfile.textContent
-  openPopup(popupEdit);
+  // nameInput.value = nameProfile.textContent
+  // jobInput.value = roleProfile.textContent
+  editPopup.open();
 }
 
 // Редактирование профиля
@@ -104,7 +113,7 @@ function handlePopupNewCardOpen() {
 // Добавление карточки с новыми значениями
 function handlePopupNewCardSubmit(evt) {
   evt.preventDefault()
-  renderItem(placeInput.value, imgInput.value);
+  renderItems(placeInput.value, imgInput.value);
   cardFormValidator.deleteInputErrors();
   cardFormValidator._setSubmitButtonInactive();
   closePopup(popupNewCard);

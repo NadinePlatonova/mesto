@@ -25,6 +25,9 @@ export const initialCards = [
     }
   ];
 
-export const popupImage = document.querySelector('.popup_type_image');
-export const placeImage = popupImage.querySelector('.popup__image');
-export const namePopupImage = popupImage.querySelector('.popup__name');
+// export const popupImage = document.querySelector('.popup_type_image');
+// export const placeImage = popupImage.querySelector('.popup__image');
+// export const namePopupImage = popupImage.querySelector('.popup__name');
+
+export const nameInput = document.querySelector('.popup__text_type_name');
+export const jobInput = document.querySelector('.popup__text_type_role');
