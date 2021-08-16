@@ -1,9 +1,8 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import { initialCards, popupImage } from '../utils/constants.js';
+import { initialCards } from '../utils/constants.js';
 // import { closePopup, openPopup } from '../utils/utils.js';
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 
@@ -14,12 +13,13 @@ const config = {
   inputErrorClass: 'popup__text_type_error',
   errorClass: 'popup__error_visible',
   containerSelector: '.elements__list',
-  cardSelector: '#element-template'
+  cardSelector: '#element-template',
+  popupImageSelector: '.popup_type_image'
 };
 
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
-const popups = document.querySelectorAll('.popup');
+// const popups = document.querySelectorAll('.popup');
 
 // Редактирование профиля
 const openPopupEdit = document.querySelector('.profile__edit-button');
@@ -36,8 +36,9 @@ const placeInput = formNewCard.querySelector('.popup__text_type_place');
 const imgInput = formNewCard.querySelector(".popup__text_type_link");
 
 // Функции
-
-const handleCardClick = (name, link) => popupImage.open(name, link);
+const openPopupWithImage = new PopupWithImage(config.popupImageSelector);
+const handleCardClick = (name, link) => openPopupWithImage.open(name, link);
+openPopupWithImage.close();
 
 // Создание карточки
 function createCard(name, link) {

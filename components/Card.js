@@ -31,10 +31,6 @@ generateCard() {
   return this._element;
 }
 
-_openImage(name, link) {
-  this._handleCardClick(name, link);
-}
-
 _likeStatus() {
   this._likeButton.classList.toggle('element__like-button_active');
 }
@@ -52,7 +48,7 @@ _setEventListeners() {
       this._handleRemove();
   })
   this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._openImage(this._name, this._link);
+      this._handleCardClick(this._name, this._link);
   })
 }
 }
