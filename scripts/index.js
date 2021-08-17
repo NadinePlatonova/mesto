@@ -52,8 +52,8 @@ openPopupWithImage.setEventListeners();
 
 const userInfo = new UserInfo(config.nameProfile, config.roleProfile)
 const popupUserForm = new PopupWithForm(config.popupEdit, {
-  handleFormSubmit: (data) => {
-        userInfo.setUserInfo(data)
+  handleFormSubmit: (name, role) => {
+        userInfo.setUserInfo(name, role)
     }
 })
 popupUserForm.setEventListeners()
