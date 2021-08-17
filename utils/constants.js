@@ -27,12 +27,16 @@ export const initialCards = [
 
 export const openPopupEdit = document.querySelector('.profile__edit-button');
 export const placeButtonAdd = document.querySelector(".profile__add-button");
-export const popupEdit = document.querySelector('.popup_type_edit');
-export const formPopupEdit = popupEdit.querySelector('.popup__form');
-export const nameInput = document.querySelector('.popup__text_type_name');
-export const jobInput = document.querySelector('.popup__text_type_role');
-export const nameProfile = document.querySelector('.profile__name');
-export const roleProfile = document.querySelector('.profile__role');
+
+export const formPopupEdit = document.forms['profileForm'];
+export const nameInput = formPopupEdit.elements.name;
+export const jobInput = formPopupEdit.elements.role;
+// export const nameProfile = document.querySelector('.profile__name');
+// export const roleProfile = document.querySelector('.profile__role');
+
+export const formNewCard = document.forms['newItemForm'];
+export const placeInput = formNewCard.elements.place;
+export const imgInput = formNewCard.elements.link;
 
 export const config = {
   inputSelector: '.popup__text',
@@ -42,5 +46,9 @@ export const config = {
   errorClass: 'popup__error_visible',
   containerSelector: '.elements__list',
   cardSelector: '#element-template',
-  popupImageSelector: '.popup_type_image'
+  popupImageSelector: '.popup_type_image',
+  popupEdit: '.popup_type_edit',
+  popupNewCard: '.popup_type_new-card',
+  nameProfile: '.profile__name',
+  roleProfile: '.profile__role'
 };
