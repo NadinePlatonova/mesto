@@ -1,5 +1,5 @@
 export default class UserInfo {
-    constructor({nameSelector, roleSelector}) {
+    constructor({ nameSelector, roleSelector }) {
         this._userName = document.querySelector(nameSelector);
         this._userRole = document.querySelector(roleSelector);
     }
@@ -11,8 +11,8 @@ export default class UserInfo {
         return getInfo
     }
 
-    setUserInfo(name, role) {
-        this._userName.textContent = name
-        this._userRole.textContent = role
+    setUserInfo(data) {
+        this._userName.textContent = data.name
+        this._userRole.textContent = data.role
     }
 }

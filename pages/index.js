@@ -5,11 +5,13 @@ initialCards,
 config,
 openPopupEdit,
 placeButtonAdd,
+// popupEdit,
 formPopupEdit,
 nameInput,
 jobInput,
 // nameProfile,
 // roleProfile,
+// popupNewCard,
 formNewCard,
 placeInput,
 imgInput 
@@ -46,10 +48,11 @@ editFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(config, formNewCard);
 cardFormValidator.enableValidation();
 
-// Открыть форму редактирования профиля
+// открыть модальное окно с картинкой
 const openPopupWithImage = new PopupWithImage(config.popupImageSelector)
 openPopupWithImage.setEventListeners();
 
+// Открыть форму редактирования профиля
 const userInfo = new UserInfo(config.nameProfile, config.roleProfile)
 const popupUserForm = new PopupWithForm(config.popupEdit, {
   handleFormSubmit: (name, role) => {
@@ -64,6 +67,28 @@ const handleProfileFormSubmit = () => {
     popupUserForm.open()
 }
 
+// Открыть форму добавления карточки
+
+const popupAddForm = new PopupWithForm(config.popupNewCard, {
+  handleFormSubmit: (name, link) => {
+    createCard(name, link);
+    renderCardList.addItem(createCard(name, link).renderItems());
+    popupAddForm.close();
+  }
+})
+popupAddForm.setEventListeners();
+
+const handlePopupNewCardOpen = () => {
+  cardFormValidator._setSubmitButtonInactive();
+  cardFormValidator.deleteInputErrors();
+  popupAddForm.open();
+  formNewCard.reset();
+}
+
+// Добавление карточки с новыми значениями
+const handlePopupNewCardSubmit = ( )=> {
+
+}
 // function openPopupForm () {
 //   editFormValidator._setSubmitButtonActive();
 //   editFormValidator.deleteInputErrors();
@@ -81,23 +106,23 @@ const handleProfileFormSubmit = () => {
 // }
 
 // Открытие модального окна "Добавление карточек"
-function handlePopupNewCardOpen() {
-  cardFormValidator._setSubmitButtonInactive();
-  cardFormValidator.deleteInputErrors();
-  // openPopup(popupNewCard)
-  formNewCard.reset()
-}
+// function handlePopupNewCardOpen() {
+//   cardFormValidator._setSubmitButtonInactive();
+//   cardFormValidator.deleteInputErrors();
+//   // openPopup(popupNewCard)
+//   formNewCard.reset()
+// }
 
 // Добавление карточки с новыми значениями
-function handlePopupNewCardSubmit(evt) {
-  evt.preventDefault()
-  renderItems(placeInput.value, imgInput.value);
-  cardFormValidator.deleteInputErrors();
-  cardFormValidator._setSubmitButtonInactive();
-  closePopup(popupNewCard);
-}
+// function handlePopupNewCardSubmit(evt) {
+//   evt.preventDefault()
+//   renderItems(placeInput.value, imgInput.value);
+//   cardFormValidator.deleteInputErrors();
+//   cardFormValidator._setSubmitButtonInactive();
+//   closePopup(popupNewCard);
+// }
  
 // openPopupEdit.addEventListener('click', openPopupForm);
 formPopupEdit.addEventListener('submit', handleProfileFormSubmit);
 placeButtonAdd.addEventListener('click', handlePopupNewCardOpen);
-formNewCard.addEventListener('submit', handlePopupNewCardSubmit);
+// formNewCard.addEventListener('submit', handlePopupNewCardSubmit);

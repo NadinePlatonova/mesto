@@ -27,12 +27,23 @@ export const initialCards = [
 
 export const openPopupEdit = document.querySelector('.profile__edit-button');
 export const placeButtonAdd = document.querySelector(".profile__add-button");
-
 export const formPopupEdit = document.forms['profileForm'];
 export const nameInput = formPopupEdit.elements.name;
 export const jobInput = formPopupEdit.elements.role;
+
+
 // export const nameProfile = document.querySelector('.profile__name');
 // export const roleProfile = document.querySelector('.profile__role');
+
+// export const popupEdit = document.querySelector('.popup_type_edit');
+// export const formPopupEdit = popupEdit.querySelector('.popup__form');
+// export const nameInput = popupEdit.querySelector('.popup__text_type_name');
+// export const jobInput = popupEdit.querySelector('.popup__text_type_role');
+
+// export const popupNewCard = document.querySelector('.popup_type_new-card');
+// export const formNewCard = popupNewCard.querySelector('.popup__form');
+// export const placeInput = popupNewCard.querySelector('.popup__text_type_place');
+// export const imgInput = popupNewCard.querySelector('.popup__text_type_link');
 
 export const formNewCard = document.forms['newItemForm'];
 export const placeInput = formNewCard.elements.place;
