@@ -5,16 +5,10 @@ initialCards,
 config,
 openPopupEdit,
 placeButtonAdd,
-// popupEdit,
 formPopupEdit,
 nameInput,
 jobInput,
-// nameProfile,
-// roleProfile,
-// popupNewCard,
 formNewCard,
-placeInput,
-imgInput 
 } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js'
 import Section from '../components/Section.js';
@@ -48,7 +42,7 @@ editFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(config, formNewCard);
 cardFormValidator.enableValidation();
 
-// открыть модальное окно с картинкой
+// Экземпляр модального окна с картинкой
 const openPopupWithImage = new PopupWithImage(config.popupImageSelector)
 openPopupWithImage.setEventListeners();
 
@@ -60,19 +54,21 @@ const popupUserForm = new PopupWithForm(config.popupEdit, {
     }
 })
 popupUserForm.setEventListeners()
-const handleProfileFormSubmit = () => {
+const handlePopupEditProfile = () => {
     const userData = userInfo.getUserInfo()
     nameInput.value = userData.name
     jobInput.value = userData.role
+    editFormValidator._setSubmitButtonActive();
+    editFormValidator.deleteInputErrors();
     popupUserForm.open()
 }
 
 // Открыть форму добавления карточки
-
 const popupAddForm = new PopupWithForm(config.popupNewCard, {
-  handleFormSubmit: (name, link) => {
-    createCard(name, link);
-    renderCardList.addItem(createCard(name, link).renderItems());
+  handleFormSubmit: (data) => {
+    const cardElement = createCard(data.place, data.link);
+    renderCardList.addItem(cardElement);
+    cardFormValidator._setSubmitButtonInactive();
     popupAddForm.close();
   }
 })
@@ -85,44 +81,5 @@ const handlePopupNewCardOpen = () => {
   formNewCard.reset();
 }
 
-// Добавление карточки с новыми значениями
-const handlePopupNewCardSubmit = ( )=> {
-
-}
-// function openPopupForm () {
-//   editFormValidator._setSubmitButtonActive();
-//   editFormValidator.deleteInputErrors();
-  // nameInput.value = nameProfile.textContent
-  // jobInput.value = roleProfile.textContent
-  // editPopup.open();
-// }
-
-// Редактирование профиля
-// function handleProfileFormSubmit (evt) {
-//   evt.preventDefault();
-//   nameProfile.textContent = nameInput.value
-//   roleProfile.textContent = jobInput.value
-//   closePopup(popupEdit);
-// }
-
-// Открытие модального окна "Добавление карточек"
-// function handlePopupNewCardOpen() {
-//   cardFormValidator._setSubmitButtonInactive();
-//   cardFormValidator.deleteInputErrors();
-//   // openPopup(popupNewCard)
-//   formNewCard.reset()
-// }
-
-// Добавление карточки с новыми значениями
-// function handlePopupNewCardSubmit(evt) {
-//   evt.preventDefault()
-//   renderItems(placeInput.value, imgInput.value);
-//   cardFormValidator.deleteInputErrors();
-//   cardFormValidator._setSubmitButtonInactive();
-//   closePopup(popupNewCard);
-// }
- 
-// openPopupEdit.addEventListener('click', openPopupForm);
-formPopupEdit.addEventListener('submit', handleProfileFormSubmit);
+openPopupEdit.addEventListener('click', handlePopupEditProfile);
 placeButtonAdd.addEventListener('click', handlePopupNewCardOpen);
-// formNewCard.addEventListener('submit', handlePopupNewCardSubmit);
