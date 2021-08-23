@@ -59,7 +59,7 @@ const handlePopupEditProfile = () => {
     const userData = userInfo.getUserInfo()
     nameInput.value = userData.name
     jobInput.value = userData.role
-    editFormValidator._setSubmitButtonActive();
+    editFormValidator.setSubmitButtonActive();
     editFormValidator.deleteInputErrors();
     popupUserForm.open()
 }
@@ -69,14 +69,14 @@ const popupAddForm = new PopupWithForm(config.popupNewCard, {
   handleFormSubmit: (data) => {
     const cardElement = createCard(data.place, data.link);
     renderCardList.addItem(cardElement);
-    cardFormValidator._setSubmitButtonInactive();
+    cardFormValidator.setSubmitButtonInactive();
     popupAddForm.close();
   }
 })
 popupAddForm.setEventListeners();
 
 const handlePopupNewCardOpen = () => {
-  cardFormValidator._setSubmitButtonInactive();
+  cardFormValidator.setSubmitButtonInactive();
   cardFormValidator.deleteInputErrors();
   popupAddForm.open();
   formNewCard.reset();
