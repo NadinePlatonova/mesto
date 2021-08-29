@@ -1,8 +1,8 @@
 import './index.css';
+import { api } from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import { 
-initialCards,
+import {
 config,
 openPopupEdit,
 placeButtonAdd,
@@ -26,15 +26,18 @@ function createCard(name, link) {
   return card.generateCard();
 }
 // Рендер карточек
-const renderCardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item.name, item.link);
-    renderCardList.addItem(cardElement);
-  }
-}, config.containerSelector);
 
-renderCardList.renderItems();
+api.getInitialCards()
+.then((data) => {
+  const renderCardList = new Section({
+    items: data,
+    renderer: (item) => {
+      const cardElement = createCard(item.name, item.link);
+      renderCardList.addItem(cardElement);
+    }
+  }, config.containerSelector);
+  renderCardList.renderItems();
+})
 
 // Валидация форм
 const editFormValidator = new FormValidator(config, formPopupEdit);
@@ -48,12 +51,33 @@ const openPopupWithImage = new PopupWithImage(config.popupImageSelector)
 openPopupWithImage.setEventListeners();
 
 // Открыть форму редактирования профиля
+// const userInfo = new UserInfo(config.nameProfile, config.roleProfile, config.avatarImage)
+// const popupUserForm = new PopupWithForm(config.popupEdit, {
+//   handleFormSubmit: (name, about) => {
+//     api.editUserInfo(name, about)
+//     }
+// })
+// .then((data) => {
+//   userInfo.setUserInfo(data.name, data.role, data.avatar)
+// })
+
+// api.getUserInfo()
+// .then((data) => {
+//   userInfo.setUserInfo(data.name, data.role, data.avatar);
+// })
+
 const userInfo = new UserInfo(config.nameProfile, config.roleProfile)
 const popupUserForm = new PopupWithForm(config.popupEdit, {
   handleFormSubmit: (name, role) => {
         userInfo.setUserInfo(name, role)
     }
 })
+// function handleFormSubmit(name, role) {
+//   api.editUserInfo(name, role)
+//   .then((data) => {
+//     userInfo.setUserInfo(data.name, data.about, data.avatar)
+//   })  
+// }
 popupUserForm.setEventListeners()
 const handlePopupEditProfile = () => {
     const userData = userInfo.getUserInfo()

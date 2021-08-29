@@ -48,5 +48,6 @@ export const config = {
   popupEdit: '.popup_type_edit',
   popupNewCard: '.popup_type_new-card',
   nameProfile: '.profile__name',
-  roleProfile: '.profile__role'
+  roleProfile: '.profile__role',
+  avatarImage: '.profile__avatar'
 };
