@@ -51,34 +51,40 @@ const openPopupWithImage = new PopupWithImage(config.popupImageSelector)
 openPopupWithImage.setEventListeners();
 
 // Открыть форму редактирования профиля
-// const userInfo = new UserInfo(config.nameProfile, config.roleProfile, config.avatarImage)
-// const popupUserForm = new PopupWithForm(config.popupEdit, {
-//   handleFormSubmit: (name, about) => {
-//     api.editUserInfo(name, about)
-//     }
-// })
-// .then((data) => {
-//   userInfo.setUserInfo(data.name, data.role, data.avatar)
-// })
-
-// api.getUserInfo()
-// .then((data) => {
-//   userInfo.setUserInfo(data.name, data.role, data.avatar);
-// })
 
 const userInfo = new UserInfo(config.nameProfile, config.roleProfile)
-const popupUserForm = new PopupWithForm(config.popupEdit, {
-  handleFormSubmit: (name, role) => {
-        userInfo.setUserInfo(name, role)
-    }
+
+// переделанное - попап с редактированием
+
+api.getUserInfo()
+.then((item) => {
+  userInfo.setUserInfo(item)
 })
-// function handleFormSubmit(name, role) {
-//   api.editUserInfo(name, role)
-//   .then((data) => {
-//     userInfo.setUserInfo(data.name, data.about, data.avatar)
-//   })  
-// }
+.catch((err) => {
+  console.log(err);
+})
+
+const popupUserForm = new PopupWithForm(config.popupEdit, {
+  handleFormSubmit: (item) => {
+    api.editUserInfo(item)
+    .then((item) => {
+      userInfo.setUserInfo(item);
+    })
+    .catch((err) => {
+      console.log(err);
+    })    
+  }
+})
+// код попапа с редактированием из 8 ПР
+// const popupUserForm = new PopupWithForm(config.popupEdit, {
+//   handleFormSubmit: (name, role) => {
+//         userInfo.setUserInfo(name, role)
+//     }
+// })
+
 popupUserForm.setEventListeners()
+
+
 const handlePopupEditProfile = () => {
     const userData = userInfo.getUserInfo()
     nameInput.value = userData.name
@@ -90,13 +96,27 @@ const handlePopupEditProfile = () => {
 
 // Открыть форму добавления карточки
 const popupAddForm = new PopupWithForm(config.popupNewCard, {
-  handleFormSubmit: (data) => {
-    const cardElement = createCard(data.place, data.link);
-    renderCardList.addItem(cardElement);
-    cardFormValidator.setSubmitButtonInactive();
-    popupAddForm.close();
+  handleFormSubmit: (item) => {
+    api.addNewCard(item)
+    .then((data) => {
+      createCard(data);
+      cardFormValidator.setSubmitButtonInactive();
+      popupAddForm.close();
+    })
   }
 })
+
+
+// Код добавления новой карточки из 8 ПР :
+
+// const popupAddForm = new PopupWithForm(config.popupNewCard, {
+//   handleFormSubmit: (data) => {
+//     const cardElement = createCard(data.place, data.link);
+//     renderCardList.addItem(cardElement);
+//     cardFormValidator.setSubmitButtonInactive();
+//     popupAddForm.close();
+//   }
+// })
 popupAddForm.setEventListeners();
 
 const handlePopupNewCardOpen = () => {

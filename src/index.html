@@ -14,8 +14,9 @@
         <section class="profile">
             <div class="profile__info">
                 <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар профиля Жак-Ив Кусто">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <p class="profile__role">Исследователь океана</p>
+                <button type="button" class="profile__edit-avatar" aria-label="Редактировать аватар"></button>
+                <h1 class="profile__name"></h1>
+                <p class="profile__role"></p>
                 <button type="button" class="profile__edit-button" aria-label="Редактировать профиль"></button>
             </div>
             <button type="button" class="profile__add-button"></button>
@@ -61,6 +62,20 @@
                 </form>
             </div>
         </section>
+
+        <section class="popup popup_type_avatar">
+            <div class="popup__container">
+                <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__form" action="#" name="edit-avatar" novalidate>
+                    <label class="popup__label">
+                        <input type="url" name="link" id="avatar-pic" class="popup__text" placeholder="Ссылка на аватар" required>
+                        <span class="popup__error" id="avatar-pic-error"></span>
+                    </label>
+                    <button type="submit" class="popup__submit-button" aria-label="Сохранить">Сохранить</button>
+                </form>
+            </div>
+        </section>
     
         <section class="popup popup_dark popup_type_image">
             <div class="popup__image-container">
@@ -74,7 +89,7 @@
             <div class="popup__container">
                 <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
                 <h2 class="popup__title popup__title_delete-card">Вы уверены?</h2>
-                <button type="submit" class="popup__submit-button" aria-label="Создать">Да</button>
+                <button type="button" class="popup__submit-button" aria-label="Создать">Да</button>
             </div>
         </section>
 
