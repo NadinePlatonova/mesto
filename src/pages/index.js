@@ -15,15 +15,45 @@ import UserInfo from '../components/UserInfo.js'
 import Section from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 // Функции
+
+let userId = "";
+
+
 // Открытие модального окна с картинкой
-const handleCardClick = (name, link) => openPopupWithImage.open(name, link);
+const handleCardClick = (data) => openPopupWithImage.open(data);
 
 // Создание карточки
-function createCard(name, link) {
-  const card = new Card(name, link, config.cardSelector, handleCardClick);
+function createCard(data) {
+  // const card = new Card(data, config.cardSelector, handleCardClick);
+  const card = new Card(data, userId, addLike, removeLike, handleDeleteCard, config.cardSelector, handleCardClick);
   return card.generateCard();
+}
+
+function handleDeleteCard(item) {
+  popupDeleteCard.setHandleFormSubmit(() => {
+    api.deleteCard(item._id)
+    .catch((err) => {
+      console.log(err);
+    })
+  })
+  popupDeleteCard.open();
+}
+
+function addLike(cardId) {
+  api.putLike(cardId)
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+function removeLike(cardId) {
+  api.deleteLike(cardId)
+  .catch((err) => {
+    console.log(err);
+  })
 }
 // Рендер карточек
 
@@ -32,7 +62,7 @@ api.getInitialCards()
   const renderCardList = new Section({
     items: data,
     renderer: (item) => {
-      const cardElement = createCard(item.name, item.link);
+      const cardElement = createCard(item);
       renderCardList.addItem(cardElement);
     }
   }, config.containerSelector);
@@ -49,6 +79,10 @@ cardFormValidator.enableValidation();
 // Экземпляр модального окна с картинкой
 const openPopupWithImage = new PopupWithImage(config.popupImageSelector)
 openPopupWithImage.setEventListeners();
+
+// Экземпляр формы с удалением
+const popupDeleteCard = new PopupWithConfirmation(config.popupDeleteCard)
+popupDeleteCard.setEventListeners();
 
 // Открыть форму редактирования профиля
 
