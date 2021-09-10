@@ -9,7 +9,7 @@
   cursor: pointer;
   border: 0;
   transition: opacity 0.5s ease;
-  display: none;
+  visibility: hidden;
 }
 
 .element__delete-button:hover {

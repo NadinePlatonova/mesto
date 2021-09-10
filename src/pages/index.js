@@ -19,55 +19,90 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 // Функции
 
-let userId = "";
+let currentUser;
+let renderCardList;
 
+const userInfo = new UserInfo(config.nameProfile, config.roleProfile)
 
-// Открытие модального окна с картинкой
-const handleCardClick = (data) => openPopupWithImage.open(data);
-
-// Создание карточки
-function createCard(data) {
-  // const card = new Card(data, config.cardSelector, handleCardClick);
-  const card = new Card(data, userId, addLike, removeLike, handleDeleteCard, config.cardSelector, handleCardClick);
-  return card.generateCard();
-}
-
-function handleDeleteCard(item) {
-  popupDeleteCard.setHandleFormSubmit(() => {
-    api.deleteCard(item._id)
-    .catch((err) => {
-      console.log(err);
-    })
-  })
-  popupDeleteCard.open();
-}
-
-function addLike(cardId) {
-  api.putLike(cardId)
-  .catch((err) => {
-    console.log(err);
-  })
-}
-
-function removeLike(cardId) {
-  api.deleteLike(cardId)
-  .catch((err) => {
-    console.log(err);
-  })
-}
 // Рендер карточек
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then(([res, cards]) => {
+  setUserInfo({ name: res.name, role: res.about });
+  setCardsArray(cards);
+})
+.catch((err) => {
+  console.log(err);
+})
 
-api.getInitialCards()
-.then((data) => {
-  const renderCardList = new Section({
-    items: data,
+function setCardsArray(cards) {
+  renderCardList = new Section({
+    items: cards,
     renderer: (item) => {
       const cardElement = createCard(item);
       renderCardList.addItem(cardElement);
     }
   }, config.containerSelector);
   renderCardList.renderItems();
-})
+}
+
+function setUserInfo(info) {
+  currentUser = info;
+  userInfo.setUserInfo(info)
+}
+// Открытие модального окна с картинкой
+const handleCardClick = (name, link) => openPopupWithImage.open(name, link);
+
+// Создание карточки
+function createCard(item) {
+  const isLiked = item.likes.some(owner => owner._id === currentUser._id)
+  const isEdited = item.owner._id === currentUser._id
+  const card = new Card(
+    item._id,
+    item.name,
+    item.link,
+    item.likes.length,
+    config.cardSelector,
+    isEdited,
+    isLiked,
+    handleCardClick,
+    handleCardDelete,
+    handleCardLike
+    );
+  return card.generateCard();
+}
+
+function handleCardDelete(card, cardId) {
+  popupWithConfirmation.open(() => {
+    api.deleteCard(cardId)
+    .then(() => {
+      card.handleRemove()
+      popupWithConfirmation.close()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  })
+}
+
+function handleCardLike(card, cardId, isActive) {
+  function editLikeCount(data) {
+    card.setLikesNumber(data.likes.length)
+    card.likeStatus()
+  }
+  if (!isActive) {
+    api.putLike(cardId)
+    .then(editLikeCount)
+    .catch((err) => {
+      console.log(err);
+    })
+  } else {
+    api.deleteLike(cardId)
+    .then(editLikeCount)
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
 
 // Валидация форм
 const editFormValidator = new FormValidator(config, formPopupEdit);
@@ -81,23 +116,10 @@ const openPopupWithImage = new PopupWithImage(config.popupImageSelector)
 openPopupWithImage.setEventListeners();
 
 // Экземпляр формы с удалением
-const popupDeleteCard = new PopupWithConfirmation(config.popupDeleteCard)
-popupDeleteCard.setEventListeners();
+const popupWithConfirmation = new PopupWithConfirmation(config.popupDeleteCard)
+popupWithConfirmation.setEventListeners();
 
 // Открыть форму редактирования профиля
-
-const userInfo = new UserInfo(config.nameProfile, config.roleProfile)
-
-// переделанное - попап с редактированием
-
-api.getUserInfo()
-.then((item) => {
-  userInfo.setUserInfo(item)
-})
-.catch((err) => {
-  console.log(err);
-})
-
 const popupUserForm = new PopupWithForm(config.popupEdit, {
   handleFormSubmit: (item) => {
     api.editUserInfo(item)
@@ -109,13 +131,6 @@ const popupUserForm = new PopupWithForm(config.popupEdit, {
     })    
   }
 })
-// код попапа с редактированием из 8 ПР
-// const popupUserForm = new PopupWithForm(config.popupEdit, {
-//   handleFormSubmit: (name, role) => {
-//         userInfo.setUserInfo(name, role)
-//     }
-// })
-
 popupUserForm.setEventListeners()
 
 
@@ -139,18 +154,6 @@ const popupAddForm = new PopupWithForm(config.popupNewCard, {
     })
   }
 })
-
-
-// Код добавления новой карточки из 8 ПР :
-
-// const popupAddForm = new PopupWithForm(config.popupNewCard, {
-//   handleFormSubmit: (data) => {
-//     const cardElement = createCard(data.place, data.link);
-//     renderCardList.addItem(cardElement);
-//     cardFormValidator.setSubmitButtonInactive();
-//     popupAddForm.close();
-//   }
-// })
 popupAddForm.setEventListeners();
 
 const handlePopupNewCardOpen = () => {
