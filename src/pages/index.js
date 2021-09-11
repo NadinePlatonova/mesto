@@ -10,6 +10,9 @@ formPopupEdit,
 nameInput,
 jobInput,
 formNewCard,
+submitButton,
+avatarEditButton,
+formAvatar
 } from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js'
 import Section from '../components/Section.js';
@@ -22,12 +25,13 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 let currentUser;
 let renderCardList;
 
-const userInfo = new UserInfo(config.nameProfile, config.roleProfile)
+const userInfo = new UserInfo(config.nameProfile, config.roleProfile, config.avatarImage)
 
 // Рендер карточек
 Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then(([res, cards]) => {
-  setUserInfo({ name: res.name, role: res.about });
+  currentUser = res._id;
+  setUserInfo({ name: res.name, role: res.about, avatar: res.avatar });
   setCardsArray(cards);
 })
 .catch((err) => {
@@ -52,10 +56,19 @@ function setUserInfo(info) {
 // Открытие модального окна с картинкой
 const handleCardClick = (name, link) => openPopupWithImage.open(name, link);
 
+// Уведомление о загрузке
+function notifyLoading(isLoading, button) {
+  if (isLoading) {
+    button.textContent = 'Сохранение...';
+  } else {
+    button.textContent = 'Сохранить';
+  }
+}
+
 // Создание карточки
 function createCard(item) {
-  const isLiked = item.likes.some(owner => owner._id === currentUser._id)
   const isEdited = item.owner._id === currentUser._id
+  const isLiked = item.likes.some(owner => owner._id === currentUser._id)
   const card = new Card(
     item._id,
     item.name,
@@ -111,6 +124,9 @@ editFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(config, formNewCard);
 cardFormValidator.enableValidation();
 
+const avatarFormValidator = new FormValidator(config, formAvatar);
+avatarFormValidator.enableValidation();
+
 // Экземпляр модального окна с картинкой
 const openPopupWithImage = new PopupWithImage(config.popupImageSelector)
 openPopupWithImage.setEventListeners();
@@ -122,13 +138,18 @@ popupWithConfirmation.setEventListeners();
 // Открыть форму редактирования профиля
 const popupUserForm = new PopupWithForm(config.popupEdit, {
   handleFormSubmit: (item) => {
+    notifyLoading(true, submitButton);
     api.editUserInfo(item)
     .then((item) => {
       userInfo.setUserInfo(item);
+      popupUserForm.close();
     })
     .catch((err) => {
       console.log(err);
-    })    
+    })
+    .finally(() => {
+      notifyLoading(false, submitButton);
+    })
   }
 })
 popupUserForm.setEventListeners()
@@ -146,11 +167,18 @@ const handlePopupEditProfile = () => {
 // Открыть форму добавления карточки
 const popupAddForm = new PopupWithForm(config.popupNewCard, {
   handleFormSubmit: (item) => {
+    notifyLoading(true, submitButton);
     api.addNewCard(item)
     .then((data) => {
       createCard(data);
       cardFormValidator.setSubmitButtonInactive();
       popupAddForm.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      notifyLoading(false, submitButton);
     })
   }
 })
@@ -163,5 +191,33 @@ const handlePopupNewCardOpen = () => {
   formNewCard.reset();
 }
 
+// Открыть редактирование аватара
+const editAvatar = new PopupWithForm(config.popupAvatar, {
+  handleFormSubmit: (item) => {
+    notifyLoading(true, submitButton);
+    api.patchAvatar(item)
+    .then((item) => {
+      userInfo.setUserInfo(item);
+      editAvatar.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      notifyLoading(false, submitButton);
+    })
+  }
+})
+editAvatar.setEventListeners()
+
+const handleEditAvatar = () => {
+  editAvatar.open();
+  avatarFormValidator.setSubmitButtonInactive();
+  avatarFormValidator.deleteInputErrors();
+  formAvatar.reset();
+}
+
+
 openPopupEdit.addEventListener('click', handlePopupEditProfile);
 placeButtonAdd.addEventListener('click', handlePopupNewCardOpen);
+avatarEditButton.addEventListener('click', handleEditAvatar);

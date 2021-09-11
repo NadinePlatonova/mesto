@@ -26,7 +26,9 @@
 //   ];
 
 export const openPopupEdit = document.querySelector('.profile__edit-button');
-export const placeButtonAdd = document.querySelector(".profile__add-button");
+export const placeButtonAdd = document.querySelector('.profile__add-button');
+export const submitButton = document.querySelector('.popup__submit-button');
+export const avatarEditButton = document.querySelector('.profile__avatar');
 
 export const formPopupEdit = document.forms['profileForm'];
 export const nameInput = formPopupEdit.elements.name;
@@ -35,6 +37,8 @@ export const jobInput = formPopupEdit.elements.role;
 export const formNewCard = document.forms['newItemForm'];
 export const placeInput = formNewCard.elements.place;
 export const imgInput = formNewCard.elements.link;
+
+export const formAvatar = document.forms['edit-avatar']
 
 export const config = {
   inputSelector: '.popup__text',
@@ -50,5 +54,6 @@ export const config = {
   popupDeleteCard: '.popup_type_delete-card',
   nameProfile: '.profile__name',
   roleProfile: '.profile__role',
-  avatarImage: '.profile__avatar'
+  avatarImage: '.profile__avatar',
+  popupAvatar: '.popup_type_avatar'
 };
