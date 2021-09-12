@@ -25,14 +25,19 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 let currentUser;
 let renderCardList;
 
-const userInfo = new UserInfo(config.nameProfile, config.roleProfile, config.avatarImage)
+const userInfo = new UserInfo(
+  config.nameProfile,
+  config.roleProfile,
+  config.avatarImage
+)
+// userInfo.setEventListeners();
 
 // Рендер карточек
 Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then(([res, cards]) => {
   currentUser = res._id;
   setUserInfo({ name: res.name, role: res.about, avatar: res.avatar });
-  setCardsArray(cards);
+  setCardsArray(cards.reverse());
 })
 .catch((err) => {
   console.log(err);
@@ -82,7 +87,7 @@ function createCard(item) {
     handleCardLike
     );
   return card.generateCard();
-}
+};
 
 function handleCardDelete(card, cardId) {
   popupWithConfirmation.open(() => {

@@ -25,7 +25,7 @@ export default class Card {
 
     if (this._isLiked) {
       cardElement.querySelector('.element__like-button').classList.add('element__like-button_active')
-    }
+    } 
 
   return cardElement;
   }

@@ -28,7 +28,7 @@
 export const openPopupEdit = document.querySelector('.profile__edit-button');
 export const placeButtonAdd = document.querySelector('.profile__add-button');
 export const submitButton = document.querySelector('.popup__submit-button');
-export const avatarEditButton = document.querySelector('.profile__avatar');
+export const avatarEditButton = document.querySelector('.profile__edit-avatar');
 
 export const formPopupEdit = document.forms['profileForm'];
 export const nameInput = formPopupEdit.elements.name;
