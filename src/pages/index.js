@@ -12,7 +12,6 @@ jobInput,
 formNewCard,
 avatarEditButton,
 formAvatar,
-popupCard,
 submitEditProfile,
 submitAddCard,
 submitEditAvatar
@@ -85,21 +84,20 @@ const handleDeleteCard = (object) => {
 }
 
 // Уведомление о загрузке
-// function notifyLoading(isLoading, button) {
-//   if (isLoading) {
-//     button.textContent = "Сохранение...";
-//   } else {
-//     button.textContent = "Сохранить";
-//   }
-// }
+function notifyLoading(isLoading, button) {
+  if (isLoading) {
+    button.textContent = "Сохранение...";
+  } else {
+    button.textContent = "Сохранить";
+  }
+}
 
 // Попапы
 
 // Попап добавления карточки
 const popupAddForm = new PopupWithForm(config.popupNewCard, {
   handleFormSubmit: (item) => {
-    // notifyLoading(true, submitAddCard);
-    popupAddForm.showLoading();
+    notifyLoading(true, submitAddCard);
     api.addNewCard(item)
     .then((data) => {
       const cardElement = createCard(data);
@@ -111,8 +109,7 @@ const popupAddForm = new PopupWithForm(config.popupNewCard, {
       console.log(err);
     })
     .finally(() => {
-      popupAddForm.hideLoading();
-      // notifyLoading(false, submitAddCard);
+      notifyLoading(false, submitAddCard);
     })
   }
 })
@@ -128,7 +125,7 @@ const handlePopupNewCardOpen = () => {
 // Попап редактирования профиля
 const popupUserForm = new PopupWithForm(config.popupEdit, {
   handleFormSubmit: (item) => {
-    // notifyLoading(true, submitEditProfile);
+    notifyLoading(true, submitEditProfile);
     api.editUserInfo(item)
     .then((item) => {
       userInfo.setUserInfo(item);
@@ -137,7 +134,7 @@ const popupUserForm = new PopupWithForm(config.popupEdit, {
       console.log(err);
     })
     .finally(() => {
-      // notifyLoading(false, submitEditProfile);
+      notifyLoading(false, submitEditProfile);
     })
   }
 })
@@ -155,7 +152,7 @@ const handlePopupEditProfile = () => {
 // Попап с аватаром
 const editAvatar = new PopupWithForm(config.popupAvatar, {
   handleFormSubmit: (item) => {
-    // notifyLoading(true, submitEditAvatar);
+    notifyLoading(true, submitEditAvatar);
     api.patchAvatar(item)
     .then((item) => {
       userInfo.setUserInfo(item);
@@ -164,7 +161,7 @@ const editAvatar = new PopupWithForm(config.popupAvatar, {
       console.log(err);
     })
     .finally(() => {
-      // notifyLoading(false, submitEditAvatar);
+      notifyLoading(false, submitEditAvatar);
     })
   }
 })
