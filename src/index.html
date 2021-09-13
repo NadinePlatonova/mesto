@@ -42,7 +42,7 @@
                         <input type="text" name="role" id="owner-role" placeholder="О себе" class="popup__text popup__text_type_role" required minlength="2" maxlength="200">
                         <span class="popup__error" id="owner-role-error"></span>
                     </label>          
-                    <button type="submit" class="popup__submit-button" aria-label="Сохранить">Сохранить</button>
+                    <button type="submit" class="popup__submit-button popup__submit-button_type_edit-profile" aria-label="Сохранить">Сохранить</button>
                 </form>
             </div>
         </section>
@@ -60,7 +60,7 @@
                         <input type="url" name="link" id="link" placeholder="Ссылка на картинку" class="popup__text popup__text_type_link" required>
                         <span class="popup__error" id="link-error"></span>
                     </label>                                   
-                    <button type="submit" class="popup__submit-button" aria-label="Создать">Создать</button>
+                    <button type="submit" class="popup__submit-button popup__submit-button_type_new-card" aria-label="Создать">Создать</button>
                 </form>
             </div>
         </section>
@@ -74,7 +74,7 @@
                         <input type="url" name="link" id="avatar-pic" class="popup__text" placeholder="Ссылка на аватар" required>
                         <span class="popup__error" id="avatar-pic-error"></span>
                     </label>
-                    <button type="submit" class="popup__submit-button" aria-label="Сохранить">Сохранить</button>
+                    <button type="submit" class="popup__submit-button popup__submit-button_type_edit-avatar" aria-label="Сохранить">Сохранить</button>
                 </form>
             </div>
         </section>
@@ -91,7 +91,7 @@
             <div class="popup__container">
                 <button type="button" class="popup__close" aria-label="Закрыть попап"></button>
                 <h2 class="popup__title popup__title_delete-card">Вы уверены?</h2>
-                <button type="button" class="popup__submit-button" aria-label="Создать">Да</button>
+                <button type="button" class="popup__submit-button popup__submit-button_type_confirm" aria-label="Создать">Да</button>
             </div>
         </section>
 

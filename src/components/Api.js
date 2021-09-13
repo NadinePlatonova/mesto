@@ -67,10 +67,10 @@ class Api {
         .then(this._checkResponseStatus);
     }
 
-    putLike(cardId) {
+    putLike(cardId, isLiked) {
         const url = `${this._baseUrl}/cards/likes/${cardId}`
         return fetch(url, {
-            method: 'PUT',
+            method: isLiked ? 'DELETE' : 'PUT',
             headers: this._headers
         })
         .then(this._checkResponseStatus);
