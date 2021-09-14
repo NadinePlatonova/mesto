@@ -5,7 +5,7 @@ export default class Card {
     this._link = data.link;
     this._ownerId = data.owner._id;
     this._likes = data.likes;
-    this._cardId = data._id;
+    this.cardId = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
@@ -39,7 +39,7 @@ export default class Card {
   }
 
   _likeStatus() {
-    this._handleLikeClick(this._cardId, this.isLiked)
+    this._handleLikeClick(this.cardId, this.isLiked)
     .then((data) => {
       this._likeButton.classList.toggle('element__like-button_active');
       this.isLiked = !this.isLiked;

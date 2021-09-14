@@ -119,7 +119,6 @@ const handlePopupNewCardOpen = () => {
   cardFormValidator.setSubmitButtonInactive();
   cardFormValidator.deleteInputErrors();
   popupAddForm.open();
-  formNewCard.reset();
 }
 
 // Попап редактирования профиля
@@ -128,7 +127,8 @@ const popupUserForm = new PopupWithForm(config.popupEdit, {
     notifyLoading(true, submitEditProfile);
     api.editUserInfo(item)
     .then((item) => {
-      userInfo.setUserInfo(item);
+      userInfo.setUserInfo({ name: item.name, role: item.about, avatar: item.avatar });
+      popupUserForm.close();
     })
     .catch((err) => {
       console.log(err);
@@ -156,6 +156,7 @@ const editAvatar = new PopupWithForm(config.popupAvatar, {
     api.patchAvatar(item)
     .then((item) => {
       userInfo.setUserInfo(item);
+      editAvatar.close();
     })
     .catch((err) => {
       console.log(err);
@@ -171,7 +172,6 @@ const handleEditAvatar = () => {
   editAvatar.open();
   avatarFormValidator.setSubmitButtonInactive();
   avatarFormValidator.deleteInputErrors();
-  formAvatar.reset();
 }
 
 // Экземпляр модального окна с картинкой
@@ -181,7 +181,7 @@ openPopupWithImage.setEventListeners();
 // Попап с подтверждением удаления карточки
 const popupWithConfirmation = new PopupWithConfirmation(config.popupDeleteCard, {
   handleDeleteButtonClick: () => {
-    const cardId = popupWithConfirmation.object._cardId;
+    const cardId = popupWithConfirmation.object.cardId;
     api.deleteCard(cardId)
     .then(() => {
       popupWithConfirmation.object.handleRemove();

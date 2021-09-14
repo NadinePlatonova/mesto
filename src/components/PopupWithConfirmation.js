@@ -7,17 +7,12 @@ export default class PopupWithConfirmation extends Popup {
         this._confirmButton = this._popup.querySelector('.popup__submit-button_type_confirm');
     }
 
-    _setEventListeners() {
+    setEventListeners() {
         super.setEventListeners();
         this._confirmButton.addEventListener('click', this._confirmDeleteCard);
     }
 
     _confirmDeleteCard = () => {
         this._handleDeleteButtonClick();
-    }
-
-    open() {
-        this._setEventListeners();
-        super.open();
     }
 }
