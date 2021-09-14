@@ -155,7 +155,7 @@ const editAvatar = new PopupWithForm(config.popupAvatar, {
     notifyLoading(true, submitEditAvatar);
     api.patchAvatar(item)
     .then((item) => {
-      userInfo.setUserInfo(item);
+      userInfo.setUserInfo({name: item.name, role: item.about, avatar: item.avatar });
       editAvatar.close();
     })
     .catch((err) => {
