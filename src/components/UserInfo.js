@@ -15,6 +15,5 @@ export default class UserInfo {
         this._userName.textContent = data.name
         this._userRole.textContent = data.role
         this._avatarPic.src = data.avatar
-        this._userId = data._id
     }
 }
