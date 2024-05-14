@@ -1,27 +1,27 @@
-# Место
-_Одностраничное приложение с профилем пользователя и карточками с картинками._
+# Mesto
+_A one-page application with a user profile and picture cards._
 
-**Основной стек:** HTML, CSS, JavaScript.
+**Stack:** HTML, CSS, JavaScript.
 
-**Основной функционал:**
-* редактирование профиля (имя пользователя, его профессия/род деятельности, а также аватар);
-* добавление и удаление карточки (удаление только карточки пользователя, чужие карточки не удаляются);
-* возможность ставить и снимать лайк у понравившихся карточек;
-* подсчет лайков;
-* при нажатии на картинку она открывается на полный экран.
+**Features:**
+* editing a profile (user's name, profession/occupation, and avatar);
+* adding and deleting a card (deleting only the user's card, other people's cards are not deleted);
+* the ability to put and remove likes from your favorite cards;
+* counting likes;
+* when clicking on an image, it opens to full screen.
 
-**Использованы:**
-* Webpack, Babel для сборки проекта;
-* JavaScript для открытия, закрытия попапа, а также для сохранения новых данных, введенных в форму попапа;
-* JavaScript для реализации лайв-валидация всех полей ввода в формах;
-* универсальная функция закрытия и открытия всех попапов, кроме модального окна с изображением;
-* организация файлов по методологии БЭМ.
+**Used:**
+* Webpack, Babel to build the project;
+* JavaScript to open, close a pop-up, as well as to save new data entered into the pop-up form;
+* JavaScript to implement live validation of all input fields in forms;
+* universal function for closing and opening all popups, except for the modal window with the image;
+* the organization of files according to the BEM methodology.
 
-**Инструкция по разворачиванию проекта:**
-* `npm run build` - сборка проекта через Webpack;
-* `npm run dev` - запуск собранного проекта;
+**Instruction for running the app (Node.js should be 14v):**
+* `npm run build` - building the project with Webpack;
+* `npm run dev` - launching the project;
 
-**Статус проекта:**
-* проект завершен.
+**Status:**
+* completed.
 
-[Перейти на сайт](https://nadineplatonova.github.io/mesto)
+[View Website](https://nadineplatonova.github.io/mesto)
